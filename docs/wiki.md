@@ -1,5 +1,8 @@
 # FullPageOS Wiki – Detaillierte Dokumentation für Raspberry Pi 2 bis Pi5
 
+## Links:
+- [FullPageOS Wiki (detaillierte Dokumentation)](docs/wiki.md)
+
 ## Übersicht
 
 Dieses Wiki bietet eine **umfassende, detaillierte Anleitung** für das Setup und die Konfiguration von **FullPageOS** auf den **Raspberry Pi 2**, **Pi 3**, **Pi 4** und **Pi 5**. FullPageOS ist ein leichtgewichtiges Betriebssystem, das Chromium im Kiosk-Modus ausführt. Es eignet sich hervorragend für den Einsatz in Kiosk-Anwendungen oder digitalen Anzeigetafeln. 
