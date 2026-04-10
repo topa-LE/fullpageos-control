@@ -1,4 +1,4 @@
-echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI2 32BIT TRIXIE)"
+echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI4 64BIT TRIXIE)"
 echo "🧠 CPU: $(uname -m)"
 
 ############################
@@ -28,7 +28,6 @@ chromium \
 curl \
 sudo \
 python3 \
-xserver-xorg-video-fbdev \
 hostname \
 unattended-upgrades \
 cron
@@ -54,7 +53,7 @@ ExecStart=-/sbin/agetty --autologin $KIOSK_USER --noclear %I \$TERM
 EOF
 
 ############################
-# 🖥️ PI2 CONFIG (FULL REPLACE)
+# 🖥️ PI3 CONFIG (FULL REPLACE)
 ############################
 BOOT_CONFIG="/boot/config.txt"
 [ -f /boot/firmware/config.txt ] && BOOT_CONFIG="/boot/firmware/config.txt"
@@ -63,15 +62,14 @@ PI_MODEL=$(tr -d '\0' < /proc/device-tree/model)
 
 echo "🔍 Gerät: $PI_MODEL"
 
-if echo "$PI_MODEL" | grep -q "Raspberry Pi 2"; then
+if echo "$PI_MODEL" | grep -q "Raspberry Pi 3"; then
 
 cat <<'EOF' > $BOOT_CONFIG
 dtparam=audio=on
 camera_auto_detect=1
 display_auto_detect=1
-auto_initramfs=1
 
-dtoverlay=vc4-fkms-v3d
+dtoverlay=vc4-kms-v3d
 
 gpu_mem=128
 max_framebuffers=2
@@ -81,7 +79,9 @@ hdmi_group=2
 hdmi_mode=82
 
 disable_overscan=1
+
 arm_boost=1
+boot_delay=1
 
 [all]
 EOF
@@ -89,7 +89,7 @@ EOF
 fi
 
 ############################
-# 🖥️ X11
+# 🖥️ X11 FIX
 ############################
 mkdir -p /etc/X11/xorg.conf.d
 
@@ -192,7 +192,7 @@ echo "$START_URL" > $KIOSK_HOME/url.txt
 chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 
 ############################
-# 🌐 API
+# 🌐 API (FIXED VERSION)
 ############################
 cat <<'EOF' > /usr/local/bin/kiosk-api.py
 #!/usr/bin/env python3
@@ -211,30 +211,40 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith("/api/v1"):
             path = path.replace("/api/v1","",1)
 
-        if path == "/reload":
-            os.system("pkill chromium")
-            self._json({"status":"reloaded"})
+        # 🔥 FIX: sauberes URL Handling
+        if path.startswith("/url="):
+            raw = path.split("=",1)[1]
 
-        elif path.startswith("/url="):
-            url = urllib.parse.unquote(path.split("=",1)[1])
+            # URL sauber decodieren
+            url = urllib.parse.unquote(raw)
+
+            # Validierung (minimal)
+            if not url.startswith("http"):
+                return self._json({"error":"invalid url"})
+
             open(URL_FILE,"w").write(url)
             os.system("pkill chromium")
-            self._json({"status":"updated","url":url})
+
+            return self._json({"status":"updated","url":url})
+
+        elif path == "/reload":
+            os.system("pkill chromium")
+            return self._json({"status":"reloaded"})
 
         elif path == "/status":
             url = open(URL_FILE).read().strip()
-            self._json({"status":"ok","url":url})
+            return self._json({"status":"ok","url":url})
 
         elif path == "/health":
             r=os.system("pgrep chromium > /dev/null")
-            self._json({"status":"ok","chromium":"running" if r==0 else "stopped"})
+            return self._json({"status":"ok","chromium":"running" if r==0 else "stopped"})
 
         elif path == "/reboot":
             self._json({"status":"rebooting"})
             os.system("reboot")
 
         else:
-            self._json({"service":"kiosk-api","version":"v1.0"})
+            return self._json({"service":"kiosk-api","version":"v3.0"})
 
     def _json(self,data):
         self.send_response(200)
@@ -242,7 +252,8 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write((json.dumps(data,indent=2)+"\n").encode())
 
-    def log_message(self,*args): return
+    def log_message(self,*args):
+        return
 
 HTTPServer(("",PORT),Handler).serve_forever()
 EOF
@@ -254,7 +265,7 @@ chmod +x /usr/local/bin/kiosk-api.py
 ############################
 cat <<EOF > /etc/systemd/system/kiosk-api.service
 [Unit]
-Description=Kiosk API V1.0
+Description=Kiosk API V3
 After=network.target
 
 [Service]
@@ -270,38 +281,25 @@ systemctl enable kiosk-api
 systemctl restart kiosk-api
 
 ############################
-# ✅ HOSTNAME SETZEN
+# ✅ HOSTNAME
 ############################
 hostnamectl set-hostname $NEW_HOSTNAME
-
-# /etc/hostname anpassen
 echo $NEW_HOSTNAME > /etc/hostname
-
-# /etc/hosts anpassen
 sed -i 's/127.0.1.1.*/127.0.1.1\t'$NEW_HOSTNAME'/' /etc/hosts
 
 ############################
-# 📅 AUTOMATISCHE UPDATES
+# 📅 AUTO UPDATE
 ############################
-# Installiere und aktiviere automatische Updates
 apt install -y unattended-upgrades
-
-# Aktiviere tägliche Sicherheitsupdates
-sudo dpkg-reconfigure --priority=low unattended-upgrades
-
-# Cron-Job für tägliche Updates
-echo "0 3 * * * apt-get update && apt-get upgrade -y" | sudo tee -a /etc/crontab > /dev/null
-
-# Aktivieren der täglichen automatischen Update-Überprüfung
-sudo systemctl enable apt-daily.timer
-sudo systemctl start apt-daily.timer
+systemctl enable apt-daily.timer
+systemctl start apt-daily.timer
 
 ############################
 # ✅ DONE
 ############################
 echo ""
-echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI2 32BIT TRIXIE)"
+echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI4 64BIT TRIXIE)"
 echo "🧠 CPU: $(uname -m)"
-echo "🌐 START: $START_URL"
+echo "🌐 URL: $START_URL"
 echo ""
 echo "➡️ REBOOT NOW"

@@ -1,6 +1,6 @@
-#!/bin/bash
+echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI3 64BIT TRIXIE)"
+echo "🧠 CPU: $(uname -m)"
 
-echo "🚀 FULLPAGEOS KIOSK V3 FINAL (PI3 64BIT TRIXIE)"
 
 ############################
 # 🔧 VARIABLEN
@@ -299,7 +299,8 @@ systemctl start apt-daily.timer
 # ✅ DONE
 ############################
 echo ""
-echo "✅ FULLPAGEOS PI3 FINAL V3 INSTALLIERT"
+echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI3 64BIT TRIXIE)"
+echo "🧠 CPU: $(uname -m)"
 echo "🌐 URL: $START_URL"
 echo ""
 echo "➡️ REBOOT NOW"
