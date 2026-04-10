@@ -1,5 +1,8 @@
 echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI2 32BIT TRIXIE)"
 echo "🧠 CPU: $(uname -m)"
+echo "💻 Hostname: $(hostname)"
+echo "📅 Build: $(date)"
+echo "🧠 CPU: $(uname -m)"
 
 ############################
 # 🔧 VARIABLEN
@@ -301,6 +304,9 @@ sudo systemctl start apt-daily.timer
 ############################
 echo ""
 echo "🚀 FULLPAGEOS KIOSK V1 BUILD (PI2 32BIT TRIXIE)"
+echo "🧠 CPU: $(uname -m)"
+echo "💻 Hostname: $(hostname)"
+echo "📅 Build: $(date)"
 echo "🧠 CPU: $(uname -m)"
 echo "🌐 START: $START_URL"
 echo ""
