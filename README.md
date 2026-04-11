@@ -187,10 +187,11 @@ Fertige Images stehen im Release zur Verfügung:
 
 ## 📦 Verfügbare Images
 
-- Raspberry Pi 2 (32bit)
-- Raspberry Pi 3 (64bit)
-- Raspberry Pi 4 (64bit)
-- Raspberry Pi 5 (64bit)
+- Pi2 (32bit) → FullpageOS Kiosk Pi2 Image
+- Pi3 (64bit) → FullpageOS Kiosk Pi3 Image
+- Pi4 (64bit) → FullpageOS Kiosk Pi4 Image
+- Pi5 (64bit) → FullpageOS Kiosk Pi5 Image
+
 
 👉 Einfach herunterladen, auf SD-Karte flashen und starten.
 
