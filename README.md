@@ -1,3 +1,5 @@
+![License](https://img.shields.io/badge/license-MIT-green)
+
 # 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
 
 Willkommen im FullPageOS Control Setup-Repository!  
@@ -158,3 +160,16 @@ config/modules.conf → Steuerung
 # 🚀 FULLPAGEOS CONTROL
 
 👉 Stabil, reproduzierbar und modular aufgebaut.
+
+
+---
+
+---
+
+## 📜 Lizenz
+
+Dieses Projekt steht unter der MIT-Lizenz.
+
+Copyright (c) 2026 topa-LE
+
+Die Nutzung, Änderung und Weitergabe der Software ist erlaubt. Die Software wird ohne jegliche Garantie bereitgestellt. Weitere Details siehe LICENSE-Datei.
