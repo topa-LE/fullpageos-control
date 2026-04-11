@@ -92,15 +92,6 @@ sudo -i
 ```bash
 apt update -y && apt upgrade -y
 ```
-## 4.1 Grund-Setup erweitern - Base-Image
-
-```bash
-cd base-image
-sudo ./setup.sh
-```
-
-👉 Optional: Base-Image Backup erstellen
-
 ---
 
 ## 5. Repository klonen
@@ -114,9 +105,20 @@ cd fullpageos-control
 
 ---
 
+## 5.1 Setup Erweiterung - Base Image
+
+```bash
+cd base-image
+sudo ./setup.sh
+```
+
+👉 Optional: Base-Image Backup erstellen
+
+---
+
 ## 6. Build ausführen
 
-Beispiel Pi4:
+Beispiel hier für Pi4: (Pi2,Pi3,Pi5 - entsprechend Ordner wählen)
 
 ```bash
 cd hardware/pi4
