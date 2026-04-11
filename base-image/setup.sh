@@ -1,16 +1,48 @@
 #!/bin/bash
 
-############################
-# 🌍 CONFIG (ANPASSBAR)
-############################
-TIMEZONE="Europe/Berlin"
-LOCALE="de_DE.UTF-8"
+clear
 
-echo "🚀 BASE IMAGE SETUP (PI4 / TRIXIE 64BIT)"
+# 🧠 PI MODELL ERKENNEN
+MODEL_RAW=$(tr -d '\0' < /proc/device-tree/model)
+
+if [[ "$MODEL_RAW" == *"Raspberry Pi 2"* ]]; then
+    PI_MODEL="Pi2"
+    ARCH="32bit"
+elif [[ "$MODEL_RAW" == *"Raspberry Pi 3"* ]]; then
+    PI_MODEL="Pi3"
+    ARCH="64bit"
+elif [[ "$MODEL_RAW" == *"Raspberry Pi 4"* ]]; then
+    PI_MODEL="Pi4"
+    ARCH="64bit"
+elif [[ "$MODEL_RAW" == *"Raspberry Pi 5"* ]]; then
+    PI_MODEL="Pi5"
+    ARCH="64bit"
+else
+    PI_MODEL="UNKNOWN"
+    ARCH="$(uname -m)"
+fi
+
+# 🚀 HEADER
+echo "🚀 BASE IMAGE SETUP (${PI_MODEL} / TRIXIE ${ARCH})"
 echo "🧠 CPU: $(uname -m)"
 echo "💻 Hostname: $(hostname)"
 echo "📅 Build: $(date)"
 echo ""
+
+# 🧠 SYSTEM UPDATE
+echo "🔄 System Update..."
+apt update -y && apt upgrade -y
+
+
+# 🌍 LOCALES
+echo "🌍 Setze Locale..."
+sed -i 's/^# *de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
+update-locale LANG=de_DE.UTF-8
+
+# 🕒 TIMEZONE
+echo "🕒 Setze Zeitzone..."
+timedatectl set-timezone Europe/Berlin
 
 ############################
 # 🔄 SYSTEM UPDATE
@@ -25,11 +57,9 @@ echo "📦 Installiere Basis Tools..."
 apt install -y \
 sudo \
 nano \
-vim \
 htop \
 curl \
 wget \
-git \
 unzip \
 rsync \
 cron \
@@ -45,17 +75,6 @@ echo "🔐 Aktiviere SSH..."
 systemctl enable ssh
 systemctl start ssh
 
-############################
-# 🌍 LOCALE & TIMEZONE
-############################
-echo "🌍 Setze Locale & Timezone..."
-echo "➡️ TIMEZONE: $TIMEZONE"
-echo "➡️ LOCALE: $LOCALE"
-
-timedatectl set-timezone $TIMEZONE
-
-sed -i "s/^# $LOCALE/$LOCALE/" /etc/locale.gen
-locale-gen
 
 update-locale LANG=$LOCALE
 
@@ -102,6 +121,6 @@ sync
 # ✅ DONE
 ############################
 echo ""
-echo "✅ BASE IMAGE FERTIG (PI4)"
+echo "✅ BASE IMAGE FERTIG"
 echo "➡️ Jetzt BACKUP erstellen!"
 echo ""
