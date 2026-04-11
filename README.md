@@ -179,6 +179,36 @@ config/modules.conf → Steuerung
 
 ---
 
+# 🚀 Download (Prebuilt Images)
+
+Fertige Images stehen im Release zur Verfügung:
+
+👉 https://github.com/topa-LE/fullpageos-control/releases
+
+## 📦 Verfügbare Images
+
+- Raspberry Pi 2 (32bit)
+- Raspberry Pi 3 (64bit)
+- Raspberry Pi 4 (64bit)
+- Raspberry Pi 5 (64bit)
+
+👉 Einfach herunterladen, auf SD-Karte flashen und starten.
+
+---
+
+## ⚡ Quick Start
+
+1. Image herunterladen  
+2. Mit Raspberry Pi Imager oder Balena Etcher flashen  
+3. SD-Karte einlegen  
+4. Booten → fertig  
+
+---
+
+👉 Kein Setup nötig – Plug & Play
+
+---
+
 # 🚀 FULLPAGEOS CONTROL
 
 👉 Stabil, reproduzierbar und modular aufgebaut.
