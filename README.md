@@ -33,7 +33,7 @@ Das FullpageOS Control System basiert auf einem Debian Self Build System mit:
 # 📦 Anforderungen
 
 - Raspberry Pi 2, 3, 4 oder 5  
-- Raspberry Pi OS (Trixie) als Basis-Image  
+- Raspberry Pi OS (Trixie Lite) als Basis-Image  
 - SD-Karte (mindestens 8 GB empfohlen)  
 - Netzwerkverbindung (LAN empfohlen)  
 - SSH Zugriff  
@@ -46,7 +46,7 @@ Das System besteht aus zwei Ebenen:
 
 ## 🟢 1. Basis-Image (Pflicht)
 
-- Raspberry Pi OS (Trixie)
+- Raspberry Pi OS (Trixie Lite)
 - 32bit (Pi2) / 64bit (Pi3–Pi5)
 - SSH aktiviert
 
@@ -70,22 +70,28 @@ Auf der Boot-Partition eine leere Datei erstellen:
 
 ssh
 
+```bash
 Login:
 user: pi
 password: raspberry
+```
 
 ---
 
 ## 3. SSH Verbindung herstellen
 
+```bash
 ssh pi@IP
 sudo -i
+```
 
 ---
 
 ## 4. (Optional) Basis vorbereiten
 
+```bash
 apt update -y && apt upgrade -y
+```
 
 👉 Optional: Base-Image Backup erstellen
 
@@ -93,9 +99,11 @@ apt update -y && apt upgrade -y
 
 ## 5. Repository klonen
 
+```bash
 cd /opt
 git clone https://github.com/topa-LE/fullpageos-control.git
 cd fullpageos-control
+```
 
 ---
 
@@ -103,15 +111,18 @@ cd fullpageos-control
 
 Beispiel Pi4:
 
+```bash
 cd hardware/pi4
 sudo ./build.sh
+```
 
 ---
 
 ## 7. Neustart
 
+```bash
 reboot
-
+```
 ---
 
 # 💥 Ergebnis
@@ -130,21 +141,25 @@ Nach dem Boot:
 
 ## URL ändern
 
+```bash
 curl "http://IP:3000/api/v1/url=https://example.com"
-
+```
 ---
 
 ## Status prüfen
 
+```bash
 curl http://IP:3000/api/v1/status
-
+```
 ---
 
 # 🧩 Modul-System
 
 Module können zentral aktiviert oder deaktiviert werden:
 
+```bash
 config/modules.conf
+```
 
 ---
 
