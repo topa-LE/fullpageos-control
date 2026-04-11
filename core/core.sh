@@ -1,11 +1,27 @@
 #!/bin/bash
+set -e
 
+############################
+# HEADER
+############################
 echo "🚀 FULLPAGEOS MASTER CORE"
 echo "🚀 FULLPAGEOS KIOSK V1 BUILD (${PI_MODEL^^} TRIXIE)"
 echo "🧠 CPU: $(uname -m)"
+echo "💻 Hostname: $(hostname)"
 echo "🖥️ MODEL: $PI_MODEL"
 echo "📅 $(date)"
 echo ""
+
+############################
+# MODULE CONFIG LADEN
+############################
+CONFIG_FILE="$(dirname "$0")/../config/modules.conf"
+
+if [ -f "$CONFIG_FILE" ]; then
+    source "$CONFIG_FILE"
+else
+    echo "⚠️ modules.conf nicht gefunden – verwende defaults"
+fi
 
 ############################
 # VARS
@@ -58,7 +74,6 @@ BOOT_CONFIG="/boot/config.txt"
 [ -f /boot/firmware/config.txt ] && BOOT_CONFIG="/boot/firmware/config.txt"
 
 if [ "$PI_MODEL" == "pi4" ] || [ "$PI_MODEL" == "pi5" ]; then
-
 cat <<EOF > $BOOT_CONFIG
 dtoverlay=vc4-kms-v3d
 gpu_mem=256
@@ -68,7 +83,6 @@ hdmi_mode=82
 hdmi_drive=2
 disable_overscan=1
 EOF
-
 fi
 
 ############################
@@ -77,11 +91,13 @@ fi
 echo "$START_URL" > $URL_FILE
 
 ############################
-# API
+# API SERVER (SYSTEMD)
 ############################
-cat <<EOF > $KIOSK_HOME/api_server.py
+cat <<EOF > /usr/local/bin/kiosk-api.py
+#!/usr/bin/env python3
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import os
+import os, urllib.parse
 
 URL_FILE = "$URL_FILE"
 
@@ -90,10 +106,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
 
         if self.path.startswith("/api/v1/url="):
-            new_url = self.path.split("=",1)[1]
+            raw = self.path.split("=",1)[1]
+            url = urllib.parse.unquote(raw)
 
             with open(URL_FILE, "w") as f:
-                f.write(new_url)
+                f.write(url)
 
             os.system("pkill -f chromium")
 
@@ -113,8 +130,27 @@ class Handler(BaseHTTPRequestHandler):
 HTTPServer(("0.0.0.0", 3000), Handler).serve_forever()
 EOF
 
+chmod +x /usr/local/bin/kiosk-api.py
+
+cat <<EOF > /etc/systemd/system/kiosk-api.service
+[Unit]
+Description=Kiosk API
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/kiosk-api.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable kiosk-api
+systemctl restart kiosk-api
+
 ############################
-# AUTOSTART
+# AUTOSTART (OPENBOX)
 ############################
 mkdir -p $KIOSK_HOME/.config/openbox
 
@@ -123,8 +159,6 @@ cat <<EOF > $KIOSK_HOME/.config/openbox/autostart
 
 export DISPLAY=:0
 export XAUTHORITY=/home/kiosk/.Xauthority
-
-python3 $KIOSK_HOME/api_server.py &
 
 xrandr --auto
 
@@ -168,7 +202,7 @@ EOF
 chmod +x $KIOSK_HOME/.config/openbox/autostart
 
 ############################
-# STARTX
+# STARTX AUTOLOGIN
 ############################
 cat <<EOF > $KIOSK_HOME/.bash_profile
 if [ -z "\$DISPLAY" ] && [ "\$(tty)" = "/dev/tty1" ]; then
@@ -177,11 +211,41 @@ fi
 EOF
 
 ############################
-# PERMS
+# PERMISSIONS
 ############################
 chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 
 ############################
+# MODULE SYSTEM
+############################
+
+run_module() {
+    MODULE_NAME=$1
+    MODULE_FILE="$(dirname "$0")/../modules/$MODULE_NAME.sh"
+
+    if [ -f "$MODULE_FILE" ]; then
+        echo "🔧 Lade Modul: $MODULE_NAME"
+        bash "$MODULE_FILE"
+    else
+        echo "⚠️ Modul fehlt: $MODULE_NAME"
+    fi
+}
+
+# MODULE V1
+[ "$WATCHDOG" = true ] && run_module "watchdog"
+[ "$CLEANUP" = true ] && run_module "cleanup"
+[ "$AUTOUPDATE" = true ] && run_module "autoupdate"
+[ "$HOSTNAME" = true ] && run_module "hostname"
+
+# MODULE V2
+[ "$LOGGING" = true ] && run_module "logging"
+[ "$HEALTH" = true ] && run_module "health"
+[ "$AUTORESTART" = true ] && run_module "autorestart"
+
+############################
 # DONE
 ############################
-echo "✅ CORE DONE"
+echo ""
+echo "✅ FULLPAGEOS CORE INSTALL FERTIG"
+echo "➡️ REBOOT NOW"
+echo ""
