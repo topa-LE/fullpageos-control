@@ -116,7 +116,7 @@ class Handler(BaseHTTPRequestHandler):
 
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(b"OK RELOAD\n")
+            self.wfile.write(b"OK RELOAD - URL UPDATED\n")
 
         elif self.path == "/api/v1/status":
             self.send_response(200)
