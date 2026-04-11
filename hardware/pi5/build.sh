@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 
-export PI_MODEL="pi4"
+export PI_MODEL="pi5"
 bash ../../core/core.sh
