@@ -92,6 +92,12 @@ sudo -i
 ```bash
 apt update -y && apt upgrade -y
 ```
+## 4.1 Grund-Setup erweitern - Base-Image
+
+```bash
+cd base-image
+sudo ./setup.sh
+```
 
 👉 Optional: Base-Image Backup erstellen
 
@@ -100,6 +106,7 @@ apt update -y && apt upgrade -y
 ## 5. Repository klonen
 
 ```bash
+apt install git -y
 cd /opt
 git clone https://github.com/topa-LE/fullpageos-control.git
 cd fullpageos-control
