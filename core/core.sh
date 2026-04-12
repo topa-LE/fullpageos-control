@@ -153,6 +153,10 @@ hdmi_mode=82
 dtoverlay=vc4-kms-v3d
 max_framebuffers=2
 
+# 🔥 HDMI FIX (empfohlen)
+hdmi_group=2
+hdmi_mode=82
+
 EOF
 
 ############################
