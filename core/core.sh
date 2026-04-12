@@ -91,6 +91,19 @@ fi
 echo "$START_URL" > $URL_FILE
 
 ############################
+# CHROMIUM POLICY (FIX TRANSLATE)
+############################
+echo "🌐 Chromium Policy setzen..."
+
+mkdir -p /etc/chromium/policies/managed
+
+cat <<EOF > /etc/chromium/policies/managed/kiosk.json
+{
+  "TranslateEnabled": false
+}
+EOF
+
+############################
 # API SERVER (SYSTEMD)
 ############################
 cat <<EOF > /usr/local/bin/kiosk-api.py
@@ -174,22 +187,34 @@ while true; do
 
 URL=\$(cat $URL_FILE)
 
-chromium \\
---no-sandbox \\
---disable-dev-shm-usage \\
---kiosk \\
---start-fullscreen \\
---noerrdialogs \\
---disable-infobars \\
---disable-session-crashed-bubble \\
---no-first-run \\
---disable-translate \\
---disable-features=Translate \\
---disable-pinch \\
---overscroll-history-navigation=0 \\
---window-position=0,0 \\
---window-size=1920,1080 \\
-"\$URL" &
+chromium \
+--no-sandbox \
+--disable-dev-shm-usage \
+--kiosk \
+--start-fullscreen \
+--noerrdialogs \
+--disable-infobars \
+--disable-session-crashed-bubble \
+--no-first-run \
+--disable-translate \
+--disable-features=Translate \
+--disable-features=TranslateUI \
+--disable-features=OptimizationHints \
+--disable-features=MediaRouter \
+--disable-component-update \
+--disable-default-apps \
+--disable-sync \
+--disable-background-networking \
+--disable-client-side-phishing-detection \
+--disable-hang-monitor \
+--disable-prompt-on-repost \
+--disable-domain-reliability \
+--disable-pinch \
+--autoplay-policy=no-user-gesture-required \
+--overscroll-history-navigation=0 \
+--window-position=0,0 \
+--window-size=1920,1080 \
+"$URL" &
 
 PID=\$!
 wait \$PID
