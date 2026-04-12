@@ -82,7 +82,8 @@ xinit \
 openbox \
 unclutter \
 chromium \
-python3
+python3 \
+xserver-xorg-video-modesetting
 
 ############################
 # USER
@@ -188,6 +189,25 @@ rm -rf $KIOSK_HOME/.config/chromium
 ############################
 touch $KIOSK_HOME/.Xauthority
 chown $KIOSK_USER:$KIOSK_USER $KIOSK_HOME/.Xauthority
+
+############################
+# PI5 XORG FIX (DRM + GPU)
+############################
+if [[ "$PI_MODEL" == "pi5" ]]; then
+
+    echo "🔧 Pi5: Setze Xorg GPU Fix"
+
+    mkdir -p /etc/X11/xorg.conf.d
+
+    cat <<EOF > /etc/X11/xorg.conf.d/99-gpu.conf
+Section "Device"
+    Identifier "GPU"
+    Driver "modesetting"
+    Option "kmsdev" "/dev/dri/card1"
+EndSection
+EOF
+
+fi
 
 ############################
 # V5 FUNCTIONS
