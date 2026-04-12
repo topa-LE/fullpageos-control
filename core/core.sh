@@ -104,22 +104,52 @@ ExecStart=-/sbin/agetty --autologin $KIOSK_USER --noclear %I \$TERM
 EOF
 
 ############################
-# HARDWARE CONFIG
+# 🔥 CONFIG.TXT FULL OVERWRITE (V5)
 ############################
+
 BOOT_CONFIG="/boot/config.txt"
 [ -f /boot/firmware/config.txt ] && BOOT_CONFIG="/boot/firmware/config.txt"
 
-if [ "$PI_MODEL" == "pi4" ] || [ "$PI_MODEL" == "pi5" ]; then
+echo "🧠 Schreibe optimierte config.txt für $PI_MODEL → $BOOT_CONFIG"
+
 cat <<EOF > $BOOT_CONFIG
-dtoverlay=vc4-kms-v3d
-gpu_mem=256
-hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_mode=82
-hdmi_drive=2
+############################################
+# FULLPAGEOS OPTIMIZED CONFIG
+############################################
+
+[all]
 disable_overscan=1
+dtparam=audio=off
+hdmi_force_hotplug=1
+hdmi_drive=2
+
+############################################
+# PI2 / PI3 (LEGACY FKMS)
+############################################
+[pi2]
+dtoverlay=vc4-fkms-v3d
+gpu_mem=128
+
+[pi3]
+dtoverlay=vc4-fkms-v3d
+gpu_mem=128
+
+############################################
+# PI4 (KMS)
+############################################
+[pi4]
+dtoverlay=vc4-kms-v3d
+max_framebuffers=2
+gpu_mem=256
+
+############################################
+# PI5 (NEXT GEN)
+############################################
+[pi5]
+dtoverlay=vc4-kms-v3d
+max_framebuffers=2
+
 EOF
-fi
 
 ############################
 # URL + RECHTE (FIXED)
