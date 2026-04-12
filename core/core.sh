@@ -13,6 +13,18 @@ echo "📅 $(date)"
 echo ""
 
 ############################
+# V5 GLOBALS
+############################
+DEVICE_ID=$(cat /etc/machine-id)
+SERVER_URL="http://YOUR-SERVER:3000"
+HEARTBEAT_INTERVAL=30
+LOG_FILE="/var/log/fullpageos.log"
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') | $1" | tee -a $LOG_FILE
+}
+
+############################
 # MODULE CONFIG LADEN
 ############################
 CONFIG_FILE="$(dirname "$0")/../config/modules.conf"
@@ -140,6 +152,59 @@ touch $KIOSK_HOME/.Xauthority
 chown $KIOSK_USER:$KIOSK_USER $KIOSK_HOME/.Xauthority
 
 ############################
+# V5 FUNCTIONS
+############################
+
+check_network() {
+    ping -c 1 1.1.1.1 >/dev/null 2>&1
+}
+
+self_heal() {
+    log "🛠 Self-Heal gestartet"
+    systemctl restart networking || true
+    echo "nameserver 1.1.1.1" > /etc/resolv.conf
+    rm -rf $KIOSK_HOME/.cache/chromium
+    log "✅ Self-Heal fertig"
+}
+
+watchdog_loop() {
+    while true; do
+        if ! pgrep -x "chromium" >/dev/null; then
+            log "❌ Chromium nicht aktiv -> Openbox Loop übernimmt Restart"
+        fi
+        sleep 10
+    done
+}
+
+heartbeat_loop() {
+    while true; do
+        STATUS="online"
+        check_network || STATUS="offline"
+
+        curl -s -X POST "$SERVER_URL/api/heartbeat" \
+        -H "Content-Type: application/json" \
+        -d "{\"device_id\":\"$DEVICE_ID\",\"status\":\"$STATUS\"}" >/dev/null || true
+
+        sleep $HEARTBEAT_INTERVAL
+    done
+}
+
+remote_loop() {
+    while true; do
+
+        CMD=$(curl -s "$SERVER_URL/api/command/$DEVICE_ID" || echo "")
+
+        case "$CMD" in
+            reboot) reboot ;;
+            self_heal) self_heal ;;
+            restart) pkill chromium ;;
+        esac
+
+        sleep 10
+    done
+}
+
+############################
 # API SERVER (FINAL)
 ############################
 cat <<EOF > /usr/local/bin/kiosk-api.py
@@ -170,7 +235,7 @@ class Handler(BaseHTTPRequestHandler):
 
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(b"OK RELOAD\\n")
+            self.wfile.write(b"OK RELOAD AND URL UPDATED\\n")
 
         elif self.path == "/api/v1/status":
             self.send_response(200)
@@ -293,6 +358,13 @@ chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 [ "$LOGGING" = true ] && run_module "logging"
 [ "$HEALTH" = true ] && run_module "health"
 [ "$AUTORESTART" = true ] && run_module "autorestart"
+
+############################
+# V5 BACKGROUND SERVICES
+############################
+watchdog_loop &
+heartbeat_loop &
+remote_loop &
 
 ############################
 # DONE
