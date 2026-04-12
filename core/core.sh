@@ -142,6 +142,10 @@ dtoverlay=vc4-kms-v3d
 max_framebuffers=2
 gpu_mem=256
 
+# 🔥 HDMI FIX
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_mode=82
 ############################################
 # PI5 (NEXT GEN)
 ############################################

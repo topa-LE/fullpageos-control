@@ -59,8 +59,8 @@ Das System besteht aus zwei Ebenen:
 ## 1. Raspberry Pi OS flashen
 
 - Raspberry Pi Imager nutzen
-- OS: Trixie Lite
-- SD-Karte flashen
+- Pi OS: Trixie Lite
+- SD-Karte flashen (mindestens 8GB)
 
 ---
 
@@ -110,6 +110,7 @@ cd fullpageos-control
 ```bash
 cd base-image
 sudo ./setup.sh
+sudo reboot
 ```
 
 👉 Optional: Base-Image Backup erstellen
@@ -121,7 +122,7 @@ sudo ./setup.sh
 Beispiel hier für Pi4: (Pi2,Pi3,Pi5 - entsprechend Ordner wählen)
 
 ```bash
-cd hardware/pi4
+cd /opt/fullpageos-control/hardware/pi4
 sudo ./build.sh
 ```
 
