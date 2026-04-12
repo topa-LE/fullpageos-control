@@ -90,6 +90,9 @@ fi
 ############################
 echo "$START_URL" > $URL_FILE
 
+chown $KIOSK_USER:$KIOSK_USER $URL_FILE
+chmod 666 $URL_FILE
+
 ############################
 # CHROMIUM POLICY (FIX TRANSLATE)
 ############################
