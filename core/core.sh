@@ -23,6 +23,30 @@ else
     echo "⚠️ modules.conf nicht gefunden – verwende defaults"
 fi
 
+# 🔒 DEFAULTS (WICHTIG!)
+WATCHDOG=${WATCHDOG:-false}
+CLEANUP=${CLEANUP:-false}
+AUTOUPDATE=${AUTOUPDATE:-false}
+HOSTNAME=${HOSTNAME:-false}
+LOGGING=${LOGGING:-false}
+HEALTH=${HEALTH:-false}
+AUTORESTART=${AUTORESTART:-false}
+
+############################
+# MODULE LOADER
+############################
+run_module() {
+    MODULE_NAME=$1
+    MODULE_FILE="$(dirname "$0")/../modules/$MODULE_NAME.sh"
+
+    if [ -f "$MODULE_FILE" ]; then
+        echo "🔧 Lade Modul: $MODULE_NAME"
+        bash "$MODULE_FILE"
+    else
+        echo "⚠️ Modul fehlt: $MODULE_NAME"
+    fi
+}
+
 ############################
 # VARS
 ############################
@@ -86,18 +110,16 @@ EOF
 fi
 
 ############################
-# URL
+# URL + RECHTE (FIXED)
 ############################
+mkdir -p $KIOSK_HOME
 echo "$START_URL" > $URL_FILE
-
 chown $KIOSK_USER:$KIOSK_USER $URL_FILE
 chmod 666 $URL_FILE
 
 ############################
-# CHROMIUM POLICY (FIX TRANSLATE)
+# CHROMIUM POLICY
 ############################
-echo "🌐 Chromium Policy setzen..."
-
 mkdir -p /etc/chromium/policies/managed
 
 cat <<EOF > /etc/chromium/policies/managed/kiosk.json
@@ -107,7 +129,18 @@ cat <<EOF > /etc/chromium/policies/managed/kiosk.json
 EOF
 
 ############################
-# API SERVER (SYSTEMD)
+# PROFILE RESET (WICHTIG!)
+############################
+rm -rf $KIOSK_HOME/.config/chromium
+
+############################
+# XAUTH FIX (WICHTIG!)
+############################
+touch $KIOSK_HOME/.Xauthority
+chown $KIOSK_USER:$KIOSK_USER $KIOSK_HOME/.Xauthority
+
+############################
+# API SERVER (FINAL)
 ############################
 cat <<EOF > /usr/local/bin/kiosk-api.py
 #!/usr/bin/env python3
@@ -125,19 +158,24 @@ class Handler(BaseHTTPRequestHandler):
             raw = self.path.split("=",1)[1]
             url = urllib.parse.unquote(raw)
 
+            if not url.startswith("http"):
+                self.send_response(400)
+                self.end_headers()
+                return
+
             with open(URL_FILE, "w") as f:
                 f.write(url)
 
-            os.system("pkill -f chromium")
+            os.system("pkill chromium")
 
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(b"OK RELOAD - URL UPDATED\n")
+            self.wfile.write(b"OK RELOAD\\n")
 
         elif self.path == "/api/v1/status":
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(b"RUNNING\n")
+            self.wfile.write(b"RUNNING\\n")
 
         else:
             self.send_response(404)
@@ -198,6 +236,7 @@ chromium \
 --noerrdialogs \
 --disable-infobars \
 --disable-session-crashed-bubble \
+--disable-restore-session-state \
 --no-first-run \
 --disable-translate \
 --disable-features=Translate \
@@ -217,7 +256,7 @@ chromium \
 --overscroll-history-navigation=0 \
 --window-position=0,0 \
 --window-size=1920,1080 \
-"$URL" &
+"\$URL" &
 
 PID=\$!
 wait \$PID
@@ -234,7 +273,7 @@ chmod +x $KIOSK_HOME/.config/openbox/autostart
 ############################
 cat <<EOF > $KIOSK_HOME/.bash_profile
 if [ -z "\$DISPLAY" ] && [ "\$(tty)" = "/dev/tty1" ]; then
-    startx
+    startx /usr/bin/openbox-session
 fi
 EOF
 
@@ -247,25 +286,10 @@ chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 # MODULE SYSTEM
 ############################
 
-run_module() {
-    MODULE_NAME=$1
-    MODULE_FILE="$(dirname "$0")/../modules/$MODULE_NAME.sh"
-
-    if [ -f "$MODULE_FILE" ]; then
-        echo "🔧 Lade Modul: $MODULE_NAME"
-        bash "$MODULE_FILE"
-    else
-        echo "⚠️ Modul fehlt: $MODULE_NAME"
-    fi
-}
-
-# MODULE V1
 [ "$WATCHDOG" = true ] && run_module "watchdog"
 [ "$CLEANUP" = true ] && run_module "cleanup"
 [ "$AUTOUPDATE" = true ] && run_module "autoupdate"
 [ "$HOSTNAME" = true ] && run_module "hostname"
-
-# MODULE V2
 [ "$LOGGING" = true ] && run_module "logging"
 [ "$HEALTH" = true ] && run_module "health"
 [ "$AUTORESTART" = true ] && run_module "autorestart"
