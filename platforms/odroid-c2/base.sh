@@ -39,6 +39,12 @@ systemctl enable snapd.socket
 systemctl start snapd.socket
 
 # wichtig: warten bis snap ready ist
+echo "⏳ Warte auf snapd..."
+
+until snap version >/dev/null 2>&1; do
+    sleep 2
+done
+
 sleep 5
 
 # core snap (Basis)
