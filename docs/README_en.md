@@ -190,10 +190,10 @@ config/modules.conf
 
 # 📦 Architektur
 
-core/core.sh        → main system
-hardware/piX/       → entry point per Pi
-modules/            → extensions
-config/modules.conf → control
+- core/core.sh        → main system 
+- hardware/piX/       → entry point per Pi 
+- modules/            → extensions 
+- config/modules.conf → control 
 
 ---
 

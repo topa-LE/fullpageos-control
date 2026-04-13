@@ -9,6 +9,15 @@
 [![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
 [![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+![Odroid C2](https://img.shields.io/badge/Odroid-C2-blue)
+![Hardkernel](https://img.shields.io/badge/Board-Hardkernel-red)
+![Arch](https://img.shields.io/badge/Arch-arm64-orange)
+![OS](https://img.shields.io/badge/Debian-Compatible-darkred)
+
+
+
 👉 🇬🇧 [English Version](./docs/README_en.md)
 
 
