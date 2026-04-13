@@ -23,23 +23,18 @@ net-tools \
 ca-certificates
 
 ############################
-# CHROMIUM (ODROID FIX – NO SNAP)
+# CHROMIUM (ODROID FIX – PPA DEB)
 ############################
 
-echo "🌐 Installiere Chromium (DEB Version für Odroid)"
+echo "🌐 Installiere Chromium (DEB via PPA)"
 
-apt install -y wget
+apt install -y software-properties-common
 
-cd /tmp
+add-apt-repository ppa:xtradeb/apps -y
 
-# Chromium Version (fixiert für Stabilität)
-wget https://launchpad.net/~chromium-team/+archive/ubuntu/stable/+files/chromium-browser_114.0.5735.90-0ubuntu0.20.04.1_arm64.deb
+apt update
 
-# Installation
-apt install -y ./chromium-browser_*.deb
-
-# Cleanup
-rm -f chromium-browser_*.deb
+apt install -y chromium
 
 echo "✅ Chromium (DEB) installiert"
 
