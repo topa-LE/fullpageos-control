@@ -1,6 +1,5 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-Supported-red)
-![Linux](https://img.shields.io/badge/Linux-Compatible-blue)
 ![Debian](https://img.shields.io/badge/Debian-Trixie-red)
 ![Kiosk](https://img.shields.io/badge/Mode-Kiosk-blue)
 ![Auto Boot](https://img.shields.io/badge/AutoBoot-Enabled-success)
@@ -8,8 +7,7 @@
 ![Watchdog](https://img.shields.io/badge/Watchdog-Active-blueviolet)
 
 ```md
-👉 [Englische Version](docs/README_en.md)
-```
+👉 [Englische Version](./docs/README_en.md)
 
 # 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
 
