@@ -7,11 +7,12 @@
 ![Watchdog](https://img.shields.io/badge/Watchdog-Active-blueviolet)
 
 ```md
-👉 [Englische Version](./docs/README_en.md)
+👉 🇬🇧 [English Version](./docs/README_en.md)
+```
 
 # 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
 
-Willkommen im FullPageOS Control Setup-Repository!  
+Willkommen im FullPageOS Control Setup-Repository!
 Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk-System auf Raspberry Pi (Pi2–Pi5) zu installieren und zu betreiben.
 
 ---
