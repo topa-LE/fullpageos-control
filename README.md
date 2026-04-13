@@ -19,7 +19,27 @@
 # 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
 
 Willkommen im FullPageOS Control Setup-Repository!
-Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk-System auf Raspberry Pi (Pi2–Pi5) zu installieren und zu betreiben.
+Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk-System auf Raspberry Pi (Pi2–Pi5) sowie auf dem Odroid-C2 zu installieren und zu betreiben.
+
+
+---
+
+# 🧭 Unterstützte Plattformen
+# 🍓 Raspberry Pi (Hauptplattform)
+- Pi2, Pi3, Pi4, Pi5
+- FullpageOS kompatibel
+- Optimiert für Kiosk-Systeme
+
+# 💻 Odroid-C2 (Alternative / Legacy Support)
+- Basis: Armbian (Debian / Ubuntu)
+- Kein FullpageOS Image verfügbar
+- Setup erfolgt über eigene Scripts (platforms/odroid-c2)
+
+👉 Hinweise:
+
+Kein Raspberry Pi Bootsystem (config.txt, dtoverlay entfallen)
+Moderner Kernel über Armbian notwendig (kein Hardkernel Ubuntu 20.04!)
+Chromium wird direkt über apt installiert (kein Snap)
 
 ---
 

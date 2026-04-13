@@ -4,7 +4,7 @@ set -e
 ############################
 # HEADER
 ############################
-echo "🚀 FULLPAGEOS ODROID-C2 CORE"
+echo "🚀 FULLPAGEOS ODROID-C2 CORE (DIETPI)"
 echo "🧠 CPU: $(uname -m)"
 echo "💻 Hostname: $(hostname)"
 echo "📅 $(date)"
@@ -26,7 +26,6 @@ log() {
 # MODULE CONFIG
 ############################
 CONFIG_FILE="$(dirname "$0")/config/modules.conf"
-
 [ -f "$CONFIG_FILE" ] && source "$CONFIG_FILE"
 
 WATCHDOG=${WATCHDOG:-false}
@@ -44,6 +43,12 @@ run_module() {
     MODULE_FILE="$(dirname "$0")/modules/$1.sh"
     [ -f "$MODULE_FILE" ] && bash "$MODULE_FILE"
 }
+
+############################
+# GPU FIX (ODROID C2)
+############################
+export LIBGL_ALWAYS_SOFTWARE=1
+export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
 
 ############################
 # USER
@@ -83,18 +88,10 @@ chmod 666 $URL_FILE
 rm -rf $KIOSK_HOME/.config/chromium
 
 ############################
-# CHROMIUM POLICY (SNAP FIX)
+# X11 INSTALL (DIETPI FIX)
 ############################
-
-mkdir -p /var/snap/chromium/current/policies/managed
-
-cat <<EOF > /var/snap/chromium/current/policies/managed/kiosk.json
-{
-  "TranslateEnabled": false,
-  "PasswordManagerEnabled": false,
-  "CredentialsEnableService": false
-}
-EOF
+apt update
+apt install -y xserver-xorg xinit openbox unclutter dbus-x11
 
 ############################
 # XAUTH FIX
@@ -202,16 +199,13 @@ while true; do
 
 URL=\$(cat $URL_FILE)
 
-/snap/bin/chromium \
+chromium \
 --no-sandbox \
+--disable-gpu \
+--disable-software-rasterizer \
 --disable-dev-shm-usage \
---kiosk \
---start-fullscreen \
---noerrdialogs \
 --disable-infobars \
 --disable-session-crashed-bubble \
---disable-restore-session-state \
---no-first-run \
 --disable-translate \
 --disable-features=Translate \
 --disable-features=TranslateUI \
@@ -228,8 +222,9 @@ URL=\$(cat $URL_FILE)
 --disable-pinch \
 --autoplay-policy=no-user-gesture-required \
 --overscroll-history-navigation=0 \
---use-gl=egl \
---ignore-gpu-blocklist \
+--kiosk \
+--incognito \
+--no-first-run \
 --window-position=0,0 \
 --window-size=1920,1080 \
 "\$URL" &
@@ -267,6 +262,6 @@ chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 # DONE
 ############################
 echo ""
-echo "✅ ODROID-C2 CORE INSTALL FERTIG"
+echo "✅ ODROID-C2 CORE INSTALL FERTIG (DIETPI READY)"
 echo "➡️ REBOOT NOW"
 echo ""

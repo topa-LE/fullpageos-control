@@ -1,16 +1,19 @@
 #!/bin/bash
 set -e
 
-echo "📦 ODROID-C2 BASE SETUP START"
+echo "📦 ODROID-C2 BASE SETUP START (DIETPI OPTIMIERT)"
 
 ############################
 # SYSTEM UPDATE
 ############################
+echo "🔄 System Update..."
 apt update -y && apt upgrade -y
 
 ############################
 # BASIS PACKAGES
 ############################
+echo "📦 Installiere Basis Pakete..."
+
 apt install -y \
 xserver-xorg \
 x11-xserver-utils \
@@ -20,49 +23,28 @@ unclutter \
 python3 \
 curl \
 net-tools \
-ca-certificates
+ca-certificates \
+git \
+wget \
+sudo \
+dbus-x11 \
+fonts-dejavu \
+fonts-liberation \
+fonts-freefont-ttf
 
 ############################
-# CHROMIUM (SNAP – OPTIMIERT)
+# CHROMIUM (APT – STABIL)
 ############################
+echo "🌐 Installiere Chromium (APT stabil)..."
 
-echo "🌐 Installiere Chromium (Snap optimiert)"
+apt install -y chromium
 
-# Snap installieren
-apt install -y snapd
-
-# Dienste aktivieren
-systemctl enable snapd
-systemctl start snapd
-
-systemctl enable snapd.socket
-systemctl start snapd.socket
-
-# wichtig: warten bis snap ready ist
-echo "⏳ Warte auf snapd..."
-
-until snap version >/dev/null 2>&1; do
-    sleep 2
-done
-
-sleep 5
-
-# core snap (Basis)
-snap install core
-
-# Chromium installieren
-snap install chromium
-
-echo "✅ Chromium (Snap) installiert"
-
-snap set system refresh.timer=02:00-04:00
-
-# Snap Performance Fix
-snap set system refresh.retain=2
+echo "✅ Chromium installiert"
 
 ############################
-# CLEANUP
+# SYSTEM CLEANUP
 ############################
+echo "🧹 Cleanup..."
 apt autoremove -y
 apt clean
 
@@ -70,9 +52,42 @@ apt clean
 # CPU PERFORMANCE MODE
 ############################
 echo "🚀 Setze CPU auf Performance"
-echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor || true
+for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+    echo performance | tee $cpu || true
+done
+
+############################
+# SYSTEM OPTIMIERUNG (ODROID C2 / DIETPI)
+############################
+
+echo "⚙️ System Optimierung..."
+
+# Swap reduzieren (SD schonen)
+sysctl -w vm.swappiness=10
+echo "vm.swappiness=10" >> /etc/sysctl.conf
+
+# Journald begrenzen
+mkdir -p /etc/systemd/journald.conf.d
+
+cat <<EOF > /etc/systemd/journald.conf.d/size.conf
+[Journal]
+SystemMaxUse=50M
+RuntimeMaxUse=50M
+EOF
+
+systemctl restart systemd-journald
+
+############################
+# NETWORK STABILITÄT
+############################
+echo "🌐 Netzwerk Fix..."
+
+cat <<EOF > /etc/resolv.conf
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+EOF
 
 ############################
 # DONE
 ############################
-echo "✅ BASE SETUP FERTIG"
+echo "✅ BASE SETUP FERTIG (DIETPI READY)"
