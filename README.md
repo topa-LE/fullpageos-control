@@ -6,9 +6,11 @@
 ![Self Healing](https://img.shields.io/badge/System-Self--Healing-important)
 ![Watchdog](https://img.shields.io/badge/Watchdog-Active-blueviolet)
 
-```md
+[![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
+[![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
+
 👉 🇬🇧 [English Version](./docs/README_en.md)
-```
+
 
 # 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
 

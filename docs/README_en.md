@@ -6,7 +6,10 @@
 ![Self Healing](https://img.shields.io/badge/System-Self--Healing-important)
 ![Watchdog](https://img.shields.io/badge/Watchdog-Active-blueviolet)
 
-👉 DE [Deutsche Version](./README.md)
+[![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](../README.md)
+[![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
+
+👉 🇩🇪 [Deutsche Version](../README.md)
 
 # 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
 
@@ -110,7 +113,7 @@ apt install git -y
 cd /opt
 git clone https://github.com/topa-LE/fullpageos-control.git
 cd fullpageos-control
-```bash
+```
 
 ---
 
