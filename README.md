@@ -5,17 +5,12 @@
 ![Auto Boot](https://img.shields.io/badge/AutoBoot-Enabled-success)
 ![Self Healing](https://img.shields.io/badge/System-Self--Healing-important)
 ![Watchdog](https://img.shields.io/badge/Watchdog-Active-blueviolet)
-
-[![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
-[![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
 ![Odroid C2](https://img.shields.io/badge/Odroid-C2-blue)
 ![Hardkernel](https://img.shields.io/badge/Board-Hardkernel-red)
 ![Arch](https://img.shields.io/badge/Arch-arm64-orange)
 ![OS](https://img.shields.io/badge/Debian-Compatible-darkred)
-
+[![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
+[![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
 
 
 👉 🇬🇧 [English Version](./docs/README_en.md)
