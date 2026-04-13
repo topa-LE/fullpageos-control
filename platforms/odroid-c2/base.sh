@@ -23,21 +23,36 @@ net-tools \
 ca-certificates
 
 ############################
-# CHROMIUM (ODROID FIX – PPA DEB)
+# CHROMIUM (SNAP – OPTIMIERT)
 ############################
 
-echo "🌐 Installiere Chromium (DEB via PPA)"
+echo "🌐 Installiere Chromium (Snap optimiert)"
 
-apt install -y software-properties-common
+# Snap installieren
+apt install -y snapd
 
-add-apt-repository ppa:xtradeb/apps -y
+# Dienste aktivieren
+systemctl enable snapd
+systemctl start snapd
 
-apt update
+systemctl enable snapd.socket
+systemctl start snapd.socket
 
-apt install -y chromium
+# wichtig: warten bis snap ready ist
+sleep 5
 
-echo "✅ Chromium (DEB) installiert"
+# core snap (Basis)
+snap install core
 
+# Chromium installieren
+snap install chromium
+
+echo "✅ Chromium (Snap) installiert"
+
+snap set system refresh.timer=02:00-04:00
+
+# Snap Performance Fix
+snap set system refresh.retain=2
 
 ############################
 # CLEANUP

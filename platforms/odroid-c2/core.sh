@@ -83,6 +83,20 @@ chmod 666 $URL_FILE
 rm -rf $KIOSK_HOME/.config/chromium
 
 ############################
+# CHROMIUM POLICY (SNAP FIX)
+############################
+
+mkdir -p /var/snap/chromium/current/policies/managed
+
+cat <<EOF > /var/snap/chromium/current/policies/managed/kiosk.json
+{
+  "TranslateEnabled": false,
+  "PasswordManagerEnabled": false,
+  "CredentialsEnableService": false
+}
+EOF
+
+############################
 # XAUTH FIX
 ############################
 touch $KIOSK_HOME/.Xauthority
@@ -188,7 +202,7 @@ while true; do
 
 URL=\$(cat $URL_FILE)
 
-chromium \
+/snap/bin/chromium \
 --no-sandbox \
 --disable-dev-shm-usage \
 --kiosk \
