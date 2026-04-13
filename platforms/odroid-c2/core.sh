@@ -129,7 +129,7 @@ class Handler(BaseHTTPRequestHandler):
             with open(URL_FILE, "w") as f:
                 f.write(url)
 
-            os.system("pkill chromium")
+            os.system("pkill chromium-browser")
 
             self.send_response(200)
             self.end_headers()
@@ -188,7 +188,7 @@ while true; do
 
 URL=\$(cat $URL_FILE)
 
-chromium \
+chromium-browser \
 --no-sandbox \
 --disable-dev-shm-usage \
 --kiosk \
