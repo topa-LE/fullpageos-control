@@ -17,7 +17,7 @@ x11-xserver-utils \
 xinit \
 openbox \
 unclutter \
-chromium-browser \
+chromium \
 python3 \
 curl \
 net-tools \
