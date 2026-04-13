@@ -102,7 +102,7 @@ sudo -i
 
 ```bash
 apt update -y && apt upgrade -y
-```bash
+```
 
 ---
 
@@ -188,7 +188,7 @@ config/modules.conf
 
 ---
 
-# 📦 Architecture
+# 📦 Architektur
 
 core/core.sh        → main system
 hardware/piX/       → entry point per Pi
@@ -196,6 +196,7 @@ modules/            → extensions
 config/modules.conf → control
 
 ---
+
 
 # 🚀 Download (Prebuilt Images)
 
