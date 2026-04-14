@@ -66,6 +66,18 @@ fi
 usermod -aG video,tty,input $KIOSK_USER
 
 ############################
+# HOSTNAME SETZEN
+############################
+NEW_HOSTNAME="fullpageOS"
+
+echo "🖥️ Setze Hostname: $NEW_HOSTNAME"
+
+hostnamectl set-hostname $NEW_HOSTNAME
+
+# /etc/hosts fix
+sed -i "s/127.0.1.1.*/127.0.1.1 $NEW_HOSTNAME/" /etc/hosts || true
+
+############################
 # AUTOLOGIN
 ############################
 mkdir -p /etc/systemd/system/getty@tty1.service.d
