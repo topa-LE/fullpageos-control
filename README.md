@@ -7,8 +7,11 @@
 ![Watchdog](https://img.shields.io/badge/Watchdog-Active-blueviolet)
 ![Odroid C2](https://img.shields.io/badge/Odroid-C2-blue)
 ![Hardkernel](https://img.shields.io/badge/Board-Hardkernel-red)
-![Arch](https://img.shields.io/badge/Arch-arm64-orange)
-![OS](https://img.shields.io/badge/Debian-Compatible-darkred)
+![OS](https://img.shields.io/badge/OS-DietPi-blue?logo=debian&logoColor=white)
+![Device](https://img.shields.io/badge/Device-Odroid%20C2-black)
+![Mode](https://img.shields.io/badge/Mode-Kiosk-green)
+![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
+![DietPi](https://img.shields.io/badge/DietPi-Kiosk%20Ready-green)
 [![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
 [![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
 

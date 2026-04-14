@@ -81,7 +81,7 @@ platforms/
 
 ```bash
 cd platforms/odroid-c2
-bash build.sh
+./build.sh
 ```
 
 ---
