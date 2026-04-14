@@ -8,7 +8,7 @@
 ![Odroid C2](https://img.shields.io/badge/Odroid-C2-blue)
 ![Hardkernel](https://img.shields.io/badge/Board-Hardkernel-red)
 ![OS](https://img.shields.io/badge/OS-DietPi-blue?logo=debian&logoColor=white)
-![Mode](https://img.shields.io/badge/Mode-Kiosk-Ready-green)
+![Mode](https://img.shields.io/badge/Mode-Kiosk%20Ready-green)
 ![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
 [![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
 [![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)

@@ -265,9 +265,10 @@ EOF
 chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 
 ############################
-# MODULES (V5 READY)
+# MODULE START (V5)
 ############################
-[ "$WATCHDOG" = true ] && run_module "watchdog"
+[ "$WATCHDOG" = true ] && run_module "watchdog" &
+[ "$HEALTH" = true ] && run_module "health" &
 
 ############################
 # DONE
