@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "📦 ODROID-C2 BASE SETUP START (DIETPI OPTIMIERT)"
+echo "📦 ODROID-C2 BASE SETUP START (FINAL)"
 
 ############################
 # SYSTEM UPDATE
@@ -27,44 +27,82 @@ ca-certificates \
 git \
 wget \
 sudo \
+dbus \
 dbus-x11 \
 fonts-dejavu \
 fonts-liberation \
-fonts-freefont-ttf
+fonts-freefont-ttf \
+xserver-xorg-video-fbdev \
+xserver-xorg-legacy
 
 ############################
 # CHROMIUM (APT – STABIL)
 ############################
-echo "🌐 Installiere Chromium (APT stabil)..."
-
+echo "🌐 Installiere Chromium..."
 apt install -y chromium
-
 echo "✅ Chromium installiert"
 
 ############################
-# SYSTEM CLEANUP
+# XORG FIX (ODROID C2)
 ############################
-echo "🧹 Cleanup..."
-apt autoremove -y
-apt clean
+echo "🖥️ XORG Fix..."
+mkdir -p /etc/X11/xorg.conf.d
+
+cat <<EOF > /etc/X11/xorg.conf.d/99-odroid.conf
+Section "Device"
+    Identifier "ODROID"
+    Driver "fbdev"
+    Option "fbdev" "/dev/fb0"
+EndSection
+EOF
+
+############################
+# XWRAPPER FIX
+############################
+echo "🔐 Xwrapper Fix..."
+cat <<EOF > /etc/X11/Xwrapper.config
+allowed_users=anybody
+needs_root_rights=yes
+EOF
+
+############################
+# CHROMIUM POLICY (NO TRANSLATE)
+############################
+echo "🚫 Chromium Policy..."
+mkdir -p /etc/chromium/policies/managed
+
+cat <<EOF > /etc/chromium/policies/managed/kiosk.json
+{
+  "TranslateEnabled": false,
+  "BrowserSignin": 0,
+  "PasswordManagerEnabled": false,
+  "CredentialsEnableService": false
+}
+EOF
+
+############################
+# DBUS AKTIVIEREN
+############################
+echo "🔌 DBUS aktivieren..."
+systemctl enable dbus
+systemctl start dbus
 
 ############################
 # CPU PERFORMANCE MODE
 ############################
-echo "🚀 Setze CPU auf Performance"
+echo "🚀 CPU Performance Mode"
 for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
     echo performance | tee $cpu || true
 done
 
 ############################
-# SYSTEM OPTIMIERUNG (ODROID C2 / DIETPI)
+# SYSTEM OPTIMIERUNG
 ############################
-
 echo "⚙️ System Optimierung..."
 
 # Swap reduzieren (SD schonen)
 sysctl -w vm.swappiness=10
-echo "vm.swappiness=10" >> /etc/sysctl.conf
+grep -q "vm.swappiness" /etc/sysctl.conf || echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 # Journald begrenzen
 mkdir -p /etc/systemd/journald.conf.d
@@ -88,6 +126,13 @@ nameserver 8.8.8.8
 EOF
 
 ############################
+# CLEANUP
+############################
+echo "🧹 Cleanup..."
+apt autoremove -y
+apt clean
+
+############################
 # DONE
 ############################
-echo "✅ BASE SETUP FERTIG (DIETPI READY)"
+echo "✅ BASE SETUP FERTIG (FINAL)"

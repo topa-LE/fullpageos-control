@@ -4,7 +4,7 @@ set -e
 ############################
 # HEADER
 ############################
-echo "🚀 FULLPAGEOS ODROID-C2 CORE (DIETPI)"
+echo "🚀 FULLPAGEOS ODROID-C2 CORE (FINAL)"
 echo "🧠 CPU: $(uname -m)"
 echo "💻 Hostname: $(hostname)"
 echo "📅 $(date)"
@@ -51,17 +51,19 @@ export LIBGL_ALWAYS_SOFTWARE=1
 export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
 
 ############################
-# USER
+# USER SETUP
 ############################
 KIOSK_USER="kiosk"
 KIOSK_HOME="/home/$KIOSK_USER"
 URL_FILE="$KIOSK_HOME/url.txt"
-START_URL="https://internet-artikel.de"
+START_URL="${START_URL:-https://internet-artikel.de}"
 
 if ! id "$KIOSK_USER" &>/dev/null; then
     useradd -m -s /bin/bash $KIOSK_USER
     echo "$KIOSK_USER:$KIOSK_USER" | chpasswd
 fi
+
+usermod -aG video,tty,input $KIOSK_USER
 
 ############################
 # AUTOLOGIN
@@ -88,19 +90,13 @@ chmod 666 $URL_FILE
 rm -rf $KIOSK_HOME/.config/chromium
 
 ############################
-# X11 INSTALL (DIETPI FIX)
-############################
-apt update
-apt install -y xserver-xorg xinit openbox unclutter dbus-x11
-
-############################
 # XAUTH FIX
 ############################
 touch $KIOSK_HOME/.Xauthority
 chown $KIOSK_USER:$KIOSK_USER $KIOSK_HOME/.Xauthority
 
 ############################
-# NETWORK CHECK
+# NETWORK CHECK + SELF HEAL
 ############################
 check_network() {
     ping -c 1 1.1.1.1 >/dev/null 2>&1
@@ -114,11 +110,10 @@ self_heal() {
 }
 
 ############################
-# API SERVER
+# API SERVER (FIXED)
 ############################
 cat <<EOF > /usr/local/bin/kiosk-api.py
 #!/usr/bin/env python3
-
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import os, urllib.parse
 
@@ -135,6 +130,7 @@ class Handler(BaseHTTPRequestHandler):
             if not url.startswith("http"):
                 self.send_response(400)
                 self.end_headers()
+                self.wfile.write(b"INVALID URL\\n")
                 return
 
             with open(URL_FILE, "w") as f:
@@ -144,6 +140,7 @@ class Handler(BaseHTTPRequestHandler):
 
             self.send_response(200)
             self.end_headers()
+            self.wfile.write(b"OK\\n")
 
         elif self.path == "/api/v1/status":
             self.send_response(200)
@@ -209,6 +206,8 @@ chromium \
 --disable-translate \
 --disable-features=Translate \
 --disable-features=TranslateUI \
+--disable-features=TranslateBubble \
+--disable-features=LanguageDetection \
 --disable-features=OptimizationHints \
 --disable-features=MediaRouter \
 --disable-component-update \
@@ -254,7 +253,7 @@ EOF
 chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 
 ############################
-# MODULES
+# MODULES (V5 READY)
 ############################
 [ "$WATCHDOG" = true ] && run_module "watchdog"
 
@@ -262,6 +261,6 @@ chown -R $KIOSK_USER:$KIOSK_USER $KIOSK_HOME
 # DONE
 ############################
 echo ""
-echo "✅ ODROID-C2 CORE INSTALL FERTIG (DIETPI READY)"
+echo "✅ CORE INSTALL FERTIG (FINAL)"
 echo "➡️ REBOOT NOW"
 echo ""
