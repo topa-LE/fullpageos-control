@@ -12,7 +12,8 @@
 ![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
 [![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
 [![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
-
+![HTML5](https://img.shields.io/badge/UI-HTML5-orange?logo=html5&logoColor=white)
+![Shell](https://img.shields.io/badge/Core-Shell-black?logo=gnu-bash&logoColor=white)
 
 👉 🇬🇧 [English Version](./docs/README_en.md)
 
@@ -231,6 +232,7 @@ Fertige Images stehen im Release zur Verfügung:
 - Pi3 (64bit) → FullpageOS Kiosk Pi3 Image
 - Pi4 (64bit) → FullpageOS Kiosk Pi4 Image
 - Pi5 (64bit) → FullpageOS Kiosk Pi5 Image
+- Odroid-C2 (64bit) → FullpageOS Kiosk DietPi Image
 
 
 👉 Einfach herunterladen, auf SD-Karte flashen und starten.
