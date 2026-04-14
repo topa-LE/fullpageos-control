@@ -13,7 +13,6 @@
 [![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
 [![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
 ![HTML5](https://img.shields.io/badge/UI-HTML5-orange?logo=html5&logoColor=white)
-![Shell](https://img.shields.io/badge/Core-Shell-black?logo=gnu-bash&logoColor=white)
 
 👉 🇬🇧 [English Version](./docs/README_en.md)
 
@@ -251,6 +250,14 @@ Fertige Images stehen im Release zur Verfügung:
 👉 Kein Setup nötig – Plug & Play
 
 ---
+
+## 🛠 Tools
+
+- flash_fullpageos.sh → Flash SD Cards
+- backup_fullpageos.sh → Erstelle Backup Images
+- restore_fullpageos.sh → Wiederherstellung Images
+- cleanup_sd.sh → Prepare SD for backup
+
 
 # 🚀 FULLPAGEOS CONTROL
 
