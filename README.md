@@ -228,6 +228,7 @@ config/modules.conf → Steuerung
 [![Release](https://img.shields.io/github/v/release/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases)
 [![Downloads](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/total)](https://github.com/topa-LE/fullpageos-control/releases)
 [![Issues](https://img.shields.io/github/issues/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/issues)
+![Pi2](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi2-32bit.img.xz?label=Pi2&color=blue)
 
 Fertige Images stehen im Release zur Verfügung:
 
