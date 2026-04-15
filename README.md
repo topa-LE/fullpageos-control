@@ -30,11 +30,14 @@ Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk
 - Pi2, Pi3, Pi4, Pi5
 - FullpageOS kompatibel
 - Optimiert für Kiosk-Systeme
+- Optimal für Grafana-Dashboards
 
 # 💻 Odroid-C2 (Alternative / Legacy Support)
 - Basis: Armbian (Debian / Ubuntu)
 - Kein FullpageOS Image verfügbar
 - Setup erfolgt über eigene Scripts (platforms/odroid-c2)
+
+👉 🇩🇪 [Install Readme](./docs/README_odroid.md)
 
 👉 Hinweise:
 
