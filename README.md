@@ -232,7 +232,7 @@ config/modules.conf → Steuerung
 ![Pi3 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi3-64bit.img.xz?displayAssetName=false&label=Pi3%20DL)
 ![Pi4 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi4-64bit.img.xz?displayAssetName=false&label=Pi4%20DL)
 ![Pi5 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi5-64bit.img.xz?displayAssetName=false&label=Pi5%20DL)
-![C2 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Odroid-C2-64bit.img.xz?displayAssetName=false&label=C2%20DL)
+![Odroid-C2 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Odroid-C2-64bit.img.xz?displayAssetName=false&label=C2%20DL)
 
 Fertige Images stehen im Release zur Verfügung:
 
