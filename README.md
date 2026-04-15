@@ -226,9 +226,8 @@ config/modules.conf → Steuerung
 
 [![Release Date](https://img.shields.io/github/release-date/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases/tag/v1.0)
 [![Release](https://img.shields.io/github/v/release/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases)
-[![Downloads](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/total)](https://github.com/topa-LE/fullpageos-control/releases)
 [![Issues](https://img.shields.io/github/issues/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/issues)&nbsp;
-![DL total](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/total?label=DL%20total)
+![Downloads total](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/total?label=DL%20total)
 ![Pi2 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi2-32bit.img.xz?displayAssetName=false&label=Pi2%20DL)
 ![Pi3 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi3-64bit.img.xz?displayAssetName=false&label=Pi3%20DL)
 ![Pi4 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi4-64bit.img.xz?displayAssetName=false&label=Pi4%20DL)
