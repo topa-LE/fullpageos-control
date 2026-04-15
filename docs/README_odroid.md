@@ -10,7 +10,7 @@ Dieses Setup dient als **Legacy Support** für bestehende Hardware.
 
 Das System basiert auf einem DietPi Basis Core-Image:
 
-👉 [DietPi Odroid C2 (Trixie) herunterladen](https://dietpi.com/downloads/images/DietPi_OdroidC2-ARMv8-Trixie.img.xz.sha256?utm_source=chatgpt.com)
+👉 [DietPi Odroid C2 (Trixie) herunterladen](https://dietpi.com/downloads/images/DietPi_OdroidC2-ARMv8-Trixie.img.xz)
 
 - Image: DietPi Odroid C2 (ARMv8 / Trixie)
 - Format: `.img.xz`
