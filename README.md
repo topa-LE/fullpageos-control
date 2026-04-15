@@ -33,8 +33,8 @@ Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk
 - Optimal für Grafana-Dashboards
 
 # 💻 Odroid-C2 (Alternative / Legacy Support)
-- Basis: Armbian (Debian / Ubuntu)
-- Kein FullpageOS Image verfügbar
+- Basis: DietPi (Debian Trixie 64bit)
+- Kein FullpageOS Image aktuell verfügbar -> ready by topa-LE
 - Setup erfolgt über eigene Scripts (platforms/odroid-c2)
 
 👉 🇩🇪 [Install Readme](./docs/README_odroid.md)

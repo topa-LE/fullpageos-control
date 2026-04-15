@@ -6,28 +6,19 @@ Dieses Setup dient als **Legacy Support** für bestehende Hardware.
 
 ---
 
-## 📦 Basis Image
+## 📦 Download (DietPi Base-Image)
 
-Empfohlenes Image:
+Das System basiert auf einem DietPi Basis Core-Image:
 
-* Ubuntu 20.04 minimal (Hardkernel)
+👉 [DietPi Odroid C2 (Trixie) herunterladen](https://dietpi.com/downloads/images/DietPi_OdroidC2-ARMv8-Trixie.img.xz.sha256?utm_source=chatgpt.com)
 
-Beispiel:
-
-```bash
-ubuntu-20.04-3.16-minimal-odroid-c2-20210201.img.xz
-```
-
----
+- Image: DietPi Odroid C2 (ARMv8 / Trixie)
+- Format: `.img.xz`
+- Minimal & optimiert für SBCs :contentReference[oaicite:1]{index=1}
 
 ## 💽 Flashen (Linux)
 
-```bash
-xzcat ubuntu-20.04-minimal-odroid-c2.img.xz | dd of=/dev/sdX bs=4M status=progress conv=fsync
-sync
-```
-
-⚠️ `/dev/sdX` anpassen!
+👉 Einfach herunterladen und auf die SD-Karte flashen und booten.
 
 ---
 
