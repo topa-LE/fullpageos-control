@@ -227,8 +227,8 @@ config/modules.conf → Steuerung
 [![Release Date](https://img.shields.io/github/release-date/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases/tag/v1.0)
 [![Release](https://img.shields.io/github/v/release/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases)
 [![Downloads](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/total)](https://github.com/topa-LE/fullpageos-control/releases)
-[![Issues](https://img.shields.io/github/issues/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/issues)
-![Pi2](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi2-32bit.img.xz?label=Pi2&color=blue)
+[![Issues](https://img.shields.io/github/issues/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/issues)&nbsp;
+![Pi2](https://img.shields.io/badge/dynamic/json?label=Pi2&suffix=%20DL&query=$.assets[?(@.name=="FullpageOS-Kiosk-v1.0-Pi2-32bit.img.xz")].download_count&url=https://api.github.com/repos/topa-LE/fullpageos-control/releases/tags/v1.0)&nbsp;![Pi3](https://img.shields.io/badge/dynamic/json?label=Pi3&suffix=%20DL&query=$.assets[?(@.name=="FullpageOS-Kiosk-v1.0-Pi3-64bit.img.xz")].download_count&url=https://api.github.com/repos/topa-LE/fullpageos-control/releases/tags/v1.0)&nbsp;![Pi4](https://img.shields.io/badge/dynamic/json?label=Pi4&suffix=%20DL&query=$.assets[?(@.name=="FullpageOS-Kiosk-v1.0-Pi4-64bit.img.xz")].download_count&url=https://api.github.com/repos/topa-LE/fullpageos-control/releases/tags/v1.0)&nbsp;![Pi5](https://img.shields.io/badge/dynamic/json?label=Pi5&suffix=%20DL&query=$.assets[?(@.name=="FullpageOS-Kiosk-v1.0-Pi5-64bit.img.xz")].download_count&url=https://api.github.com/repos/topa-LE/fullpageos-control/releases/tags/v1.0) ![C2](https://img.shields.io/badge/dynamic/json?label=C2&suffix=%20DL&query=$.assets[?(@.name=="FullpageOS-Kiosk-v1.0-Odroid-C2-64bit.img.xz")].download_count&url=https://api.github.com/repos/topa-LE/fullpageos-control/releases/tags/v1.0)
 
 Fertige Images stehen im Release zur Verfügung:
 
