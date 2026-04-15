@@ -13,6 +13,7 @@
 [![🇩🇪 Deutsch](https://img.shields.io/badge/lang-DE-blue)](./README.md)
 [![🇬🇧 English](https://img.shields.io/badge/lang-EN-red)](./docs/README_en.md)
 ![HTML5](https://img.shields.io/badge/UI-HTML5-orange?logo=html5&logoColor=white)
+![Stars](https://img.shields.io/github/stars/topa-LE/fullpageos-control)
 
 👉 🇬🇧 [English Version](./docs/README_en.md)
 
@@ -21,7 +22,6 @@
 
 Willkommen im FullPageOS Control Setup-Repository!
 Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk-System auf Raspberry Pi (Pi2–Pi5) sowie auf dem Odroid-C2 zu installieren und zu betreiben.
-
 
 ---
 
@@ -223,6 +223,11 @@ config/modules.conf → Steuerung
 ---
 
 # 🚀 Download (Prebuilt Images)
+
+[![Release Date](https://img.shields.io/github/release-date/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases/tag/v1.0)
+[![Release](https://img.shields.io/github/v/release/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases)
+[![Downloads](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/total)](https://github.com/topa-LE/fullpageos-control/releases)
+[![Issues](https://img.shields.io/github/issues/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/issues)
 
 Fertige Images stehen im Release zur Verfügung:
 
