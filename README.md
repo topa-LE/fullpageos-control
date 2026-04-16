@@ -213,6 +213,9 @@ config/modules.conf
 
 ---
 
+# 📦 Architektur
+
+```text
 📦 fullpageos-control/
 │
 ├── 🧠 core/
@@ -235,7 +238,7 @@ config/modules.conf
     ├── backup_fullpageos.sh
     ├── restore_backups.sh
     └── flash.sh
-
+```
 ---
 
 # 🚀 Download (Prebuilt Images)
