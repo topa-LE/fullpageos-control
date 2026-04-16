@@ -76,7 +76,7 @@ Das FullpageOS Control System basiert auf einem Debian Self Build System mit:
 - Raspberry Pi OS (Trixie Lite) als Basis-Image  
 - SD-Karte (mindestens 8 GB empfohlen)  
 - Netzwerkverbindung (LAN empfohlen)  
-- SSH Zugriff  
+- SSH Zugriff erforderlich  
 
 ---
 
@@ -88,7 +88,7 @@ Das System besteht aus zwei Ebenen:
 
 - Raspberry Pi OS (Trixie Lite)
 - 32bit (Pi2) / 64bit (Pi3–Pi5)
-- SSH aktiviert
+- SSH muss aktiviert werden
 
 👉 Ohne ein bootfähiges Raspberry Pi OS funktioniert das System NICHT.
 
@@ -213,12 +213,28 @@ config/modules.conf
 
 ---
 
-# 📦 Architektur
-
-core/core.sh        → Hauptsystem  
-hardware/piX/       → Startpunkt je Pi  
-modules/            → Erweiterungen  
-config/modules.conf → Steuerung  
+📦 fullpageos-control/
+│
+├── 🧠 core/
+│   └── core.sh                → Hauptsystem / zentrale Logik
+│
+├── 🖥️ hardware/
+│   └── piX/                   → Einstieg Raspberry Pi (Pi2–Pi5)
+│
+├── 🔌 platforms/
+│   └── odroid-c2/             → Einstieg Odroid C2
+│       ├── ⚙️ modules/        → Plattform-spezifische Erweiterungen
+│       └── 🧩 config/         → Plattform-spezifische Konfiguration
+│
+├── ⚙️ modules/                → Globale Erweiterungen
+│
+├── 🧩 config/
+│   └── modules.conf           → Zentrale Steuerung
+│
+└── 🛠️ tools/                  → Tools & Wartung
+    ├── backup_fullpageos.sh
+    ├── restore_backups.sh
+    └── flash.sh
 
 ---
 
@@ -234,7 +250,7 @@ config/modules.conf → Steuerung
 ![Pi5 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Pi5-64bit.img.xz?displayAssetName=false&label=Pi5%20DL)
 ![OdroidC2 DL](https://img.shields.io/github/downloads/topa-LE/fullpageos-control/v1.0/FullpageOS-Kiosk-v1.0-Odroid-C2-64bit.img.xz?displayAssetName=false&label=C2%20DL)
 
-Fertige Images stehen im Release zur Verfügung:
+Fertige Images stehen im Release zur Verfügung (Pi's alle Modelle + Odroid-C2):
 
 👉 https://github.com/topa-LE/fullpageos-control/releases
 

@@ -1,6 +1,6 @@
 # ODROID-C2 – FULLPAGEOS KIOSK (LEGACY PLATFORM)
 
-⚠️ **Hinweis:**
+## **Hinweis:**
 Der Odroid-C2 ist eine ältere, nicht mehr aktiv weiterentwickelte Plattform.
 Dieses Setup dient als **Legacy Support** für bestehende Hardware.
 
