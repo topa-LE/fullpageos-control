@@ -289,7 +289,8 @@ Fertige Images stehen im Release zur Verfügung (Pi's alle Modelle + Odroid-C2):
 - backup_fullpageos.sh → Erstelle Backup Images
 - restore_fullpageos.sh → Wiederherstellung Images
 - cleanup_sd.sh → Prepare SD for backup
-- debian_usb_autoboot_stick.sh - Debian USB Boot Stick Creator
+- debian_auto.sh - Debian USB Boot Stick Full-Creator
+- debian_usb.sh - Debian 12/13 USB Boot Creator
 
 ## 🔧 Included Tools
 - Debian USB Boot Creator (12/13)
@@ -302,17 +303,6 @@ Fertige Images stehen im Release zur Verfügung (Pi's alle Modelle + Odroid-C2):
 
 ---
 
-## 🔧 Tools
-
-### Debian USB Boot Stick Creator
-
-Create a bootable Debian 12/13 server USB stick directly from a Linux build server.
-
-Usage:
-```bash
-sudo ./tools/usb_boot_stick_debian_12_13_lite_server.sh
-```
----
 
 ## 📜 Lizenz
 
