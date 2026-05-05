@@ -13,7 +13,7 @@ Supports:
 
 ### ⚡ Quick Start
 
-sudo ./tools/usb_boot_stick_debian_12_13_lite_server.sh
+sudo ./tools/debian_usb.sh
 
 ---
 
@@ -37,7 +37,7 @@ password: debian
 
 ### ⚡ Auto Install Usage
 
-sudo ./tools/usb_boot_stick_debian_12_auto_server.sh
+sudo ./tools/debian_auto.sh
 
 ---
 
