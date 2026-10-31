@@ -1,0 +1,7 @@
+# FullPageOS Control - Debian Chromium bevorzugen
+# Raspberry-Pi-Chromium nicht automatisch installieren.
+# Debian-Sicherheitsupdates bleiben erlaubt.
+
+Package: chromium chromium-common chromium-l10n
+Pin: origin "archive.raspberrypi.com"
+Pin-Priority: -1

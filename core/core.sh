@@ -68,9 +68,24 @@ URL_FILE="$KIOSK_HOME/url.txt"
 START_URL="https://internet-artikel.de"
 
 ############################
+# CHROMIUM – DEBIAN PAKETQUELLE
+############################
+# Gemeinsame APT-Regel fuer alle Raspberry-Pi-Installationen.
+CORE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CHROMIUM_PREF="$CORE_DIR/../config/90-fullpageos-chromium.pref"
+
+if [ ! -f "$CHROMIUM_PREF" ]; then
+    echo "ABBRUCH: Chromium-APT-Konfiguration fehlt."
+    exit 1
+fi
+
+install -D -m 644 "$CHROMIUM_PREF" /etc/apt/preferences.d/90-fullpageos-chromium
+
+############################
 # SYSTEM
 ############################
 apt update -y && apt upgrade -y
+
 
 ############################
 # PACKAGES
@@ -81,9 +96,57 @@ x11-xserver-utils \
 xinit \
 openbox \
 unclutter \
-chromium \
 python3 \
 xserver-xorg-video-modesetting
+
+# Raspberry-Pi-Zusatzpaket kann mit Debian chromium-common kollidieren.
+# Bei bestehenden Installationen nur entfernen, wenn keine weiteren
+# Pakete davon betroffen sind.
+if dpkg-query -W -f='${db:Status-Abbrev}' rpi-chromium-mods 2>/dev/null | grep -q '^ii'; then
+    echo "Pruefe Entfernung von rpi-chromium-mods ..."
+
+    REMOVE_PLAN=$(apt-get -s remove rpi-chromium-mods)
+
+    REMOVE_PACKAGES=$(printf '%s\n' "$REMOVE_PLAN" | awk '$1 == "Remv" {print $2}')
+
+    if [ "$REMOVE_PACKAGES" != "rpi-chromium-mods" ]; then
+        echo "ABBRUCH: APT moechte weitere oder andere Pakete entfernen."
+        printf '%s\n' "$REMOVE_PLAN"
+        exit 1
+    fi
+
+    apt-get remove -y rpi-chromium-mods
+fi
+
+# Die Debian-Version dynamisch aus den APT-Paketlisten ermitteln.
+# Bei bereits installiertem Raspberry-Pi-Chromium ist wegen des
+# Versions-Epochs 1: ein ausdruecklicher Downgrade erforderlich.
+DEBIAN_CHROMIUM_VERSION=""
+
+while IFS= read -r VERSION; do
+    if [ -z "$DEBIAN_CHROMIUM_VERSION" ] ||
+       dpkg --compare-versions "$VERSION" gt "$DEBIAN_CHROMIUM_VERSION"; then
+        DEBIAN_CHROMIUM_VERSION="$VERSION"
+    fi
+done < <(
+    apt-cache madison chromium |
+        awk -F '|' '$3 ~ /deb[.]debian[.]org/ {
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2)
+            print $2
+        }'
+)
+
+if [ -z "$DEBIAN_CHROMIUM_VERSION" ]; then
+    echo "ABBRUCH: Keine Debian-Chromium-Version gefunden."
+    exit 1
+fi
+
+echo "Debian-Chromium-Version: $DEBIAN_CHROMIUM_VERSION"
+
+apt-get install -y --allow-downgrades --no-install-recommends \
+    "chromium=$DEBIAN_CHROMIUM_VERSION" \
+    "chromium-common=$DEBIAN_CHROMIUM_VERSION" \
+    "chromium-l10n=$DEBIAN_CHROMIUM_VERSION"
 
 ############################
 # USER

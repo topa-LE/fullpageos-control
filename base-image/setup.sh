@@ -29,6 +29,20 @@ echo "💻 Hostname: $(hostname)"
 echo "📅 Build: $(date)"
 echo ""
 
+############################
+# CHROMIUM – DEBIAN PAKETQUELLE
+############################
+# APT-Regel vor dem ersten Systemupdate installieren.
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CHROMIUM_PREF="$BASE_DIR/../config/90-fullpageos-chromium.pref"
+
+if [ ! -f "$CHROMIUM_PREF" ]; then
+    echo "ABBRUCH: Chromium-APT-Konfiguration fehlt."
+    exit 1
+fi
+
+install -D -m 644 "$CHROMIUM_PREF" /etc/apt/preferences.d/90-fullpageos-chromium
+
 # 🧠 SYSTEM UPDATE
 echo "🔄 System Update..."
 apt update -y && apt upgrade -y
