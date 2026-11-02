@@ -11,14 +11,13 @@
 
 👉 🇩🇪 [Deutsche Version](../README.md)
 
-# 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
+<img src="../docs/assets/section-headers/en/01-project.svg" alt="Section heading" width="837">
 
 Welcome to the FullPageOS Control setup repository!
 This repository contains everything you need to install and run a complete kiosk system on Raspberry Pi (Pi2–PI5).
 
----
 
-# 🧠 The Debian Self Build System
+<img src="../docs/assets/section-headers/en/02-system.svg" alt="Section heading" width="837">
 
 The FullpageOS Control system is based on a Debian self build system with:
 
@@ -28,9 +27,8 @@ The FullpageOS Control system is based on a Debian self build system with:
 
 👉 Specifically developed for Grafana dashboards and monitoring systems.
 
----
 
-# 🔥 Features
+<img src="../docs/assets/section-headers/en/03-features.svg" alt="Section heading" width="837">
 
 - Easy installation: A single script execution sets up the entire system
 - Automated updates: System stays automatically up to date
@@ -39,9 +37,8 @@ The FullpageOS Control system is based on a Debian self build system with:
 - API control: Change URL via HTTP
 - Modular design: Extendable via module system
 
----
 
-# 📦 Requirements
+<img src="../docs/assets/section-headers/en/04-requirements.svg" alt="Section heading" width="837">
 
 - Raspberry Pi 2, 3, 4 or 5
 - Raspberry Pi OS (Trixie Lite) as base image
@@ -49,9 +46,8 @@ The FullpageOS Control system is based on a Debian self build system with:
 - Network connection (LAN recommended)
 - SSH access
 
----
 
-# 🧠 Concept
+<img src="../docs/assets/section-headers/en/05-concept.svg" alt="Section heading" width="837">
 
 The system consists of two layers:
 
@@ -63,9 +59,8 @@ The system consists of two layers:
 
 👉 Without a bootable Raspberry Pi OS the system will NOT work.
 
----
 
-# 🚀 Installation
+<img src="../docs/assets/section-headers/en/06-installation.svg" alt="Section heading" width="837">
 
 ## 1. Flash Raspberry Pi OS
 
@@ -73,7 +68,6 @@ The system consists of two layers:
 - Pi OS: Trixie Lite
 - Flash SD card (minimum 8GB)
 
----
 
 ## 2. Enable SSH
 
@@ -87,7 +81,6 @@ user: pi
 password: raspberry
 ```
 
----
 
 ## 3. Connect via SSH
 
@@ -96,7 +89,6 @@ ssh pi@IP
 sudo -i
 ```
 
----
 
 ## 4. (Optional) Prepare base system
 
@@ -104,7 +96,6 @@ sudo -i
 apt update -y && apt upgrade -y
 ```
 
----
 
 ## 5. Clone repository
 
@@ -115,7 +106,6 @@ git clone https://github.com/topa-LE/fullpageos-control.git
 cd fullpageos-control
 ```
 
----
 
 ## 5.1 Setup Extension - Base Image
 
@@ -127,7 +117,6 @@ sudo reboot
 
 👉 Optional: Create base image backup
 
----
 
 ## 6. Run build
 
@@ -138,7 +127,6 @@ cd /opt/fullpageos-control/hardware/pi4
 sudo ./build.sh
 ```
 
----
 
 ## 7. Reboot
 
@@ -146,9 +134,8 @@ sudo ./build.sh
 reboot
 ```
 
----
 
-# 💥 Result
+<img src="../docs/assets/section-headers/en/07-result.svg" alt="Section heading" width="837">
 
 After boot:
 
@@ -158,9 +145,8 @@ After boot:
 - API running on port 3000
 - Modules active
 
----
 
-# 🌐 API Usage
+<img src="../docs/assets/section-headers/en/08-api.svg" alt="Section heading" width="837">
 
 ## Change URL
 
@@ -168,7 +154,6 @@ After boot:
 curl "http://IP:3000/api/v1/url=https://example.com"
 ```
 
----
 
 ## Check status
 
@@ -176,9 +161,8 @@ curl "http://IP:3000/api/v1/url=https://example.com"
 curl http://IP:3000/api/v1/status
 ```
 
----
 
-# 🧩 Module System
+<img src="../docs/assets/section-headers/en/09-modules.svg" alt="Section heading" width="837">
 
 Modules can be centrally enabled or disabled:
 
@@ -186,19 +170,17 @@ Modules can be centrally enabled or disabled:
 config/modules.conf
 ```
 
----
 
-# 📦 Architektur
+<img src="../docs/assets/section-headers/en/10-architecture.svg" alt="Section heading" width="837">
 
 - core/core.sh        → main system 
 - hardware/piX/       → entry point per Pi 
 - modules/            → extensions 
 - config/modules.conf → control 
 
----
 
 
-# 🚀 Download (Prebuilt Images)
+<img src="../docs/assets/section-headers/en/11-download.svg" alt="Section heading" width="837">
 
 Prebuilt images are available in the release section:
 
@@ -214,7 +196,6 @@ Prebuilt images are available in the release section:
 
 👉 Simply download, flash to SD card and start.
 
----
 
 ## ⚡ Quick Start
 
@@ -223,17 +204,14 @@ Prebuilt images are available in the release section:
 3. Insert SD card
 4. Boot → done
 
----
 
 👉 No setup required – plug & play
 
----
 
-# 🚀 FULLPAGEOS CONTROL
+<img src="../docs/assets/section-headers/en/12-project.svg" alt="Section heading" width="837">
 
 👉 Stable, reproducible and modular design.
 
----
 
 ## 📜 License
 

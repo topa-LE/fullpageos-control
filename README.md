@@ -18,21 +18,20 @@
 👉 🇬🇧 [English Version](./docs/README_en.md)
 
 
-# 🚀 FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)
+<img src="docs/assets/section-headers/de/01-project.svg" alt="Section heading" width="837">
 
 Willkommen im FullPageOS Control Setup-Repository!
 Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk-System auf Raspberry Pi (Pi2–Pi5) sowie auf dem Odroid-C2 zu installieren und zu betreiben.
 
----
 
-# 🧭 Unterstützte Plattformen
-# 🍓 Raspberry Pi (Hauptplattform)
+<img src="docs/assets/section-headers/de/02-platforms.svg" alt="Section heading" width="837">
+<img src="docs/assets/section-headers/de/03-raspberry.svg" alt="Section heading" width="837">
 - Pi2, Pi3, Pi4, Pi5
 - FullpageOS kompatibel
 - Optimiert für Kiosk-Systeme
 - Optimal für Grafana-Dashboards
 
-# 💻 Odroid-C2 (Alternative / Legacy Support)
+<img src="docs/assets/section-headers/de/04-odroid.svg" alt="Section heading" width="837">
 - Basis: DietPi (Debian Trixie 64bit)
 - Kein FullpageOS Image aktuell verfügbar -> ready by topa-LE
 - Setup erfolgt über eigene Scripts (platforms/odroid-c2)
@@ -45,9 +44,8 @@ Kein Raspberry Pi Bootsystem (config.txt, dtoverlay entfallen)
 Moderner Kernel über Armbian notwendig (kein Hardkernel Ubuntu 20.04!)
 Chromium wird direkt über apt installiert (kein Snap)
 
----
 
-# 🧠 Das Debian Self Build System
+<img src="docs/assets/section-headers/de/05-system.svg" alt="Section heading" width="837">
 
 Das FullpageOS Control System basiert auf einem Debian Self Build System mit:
 
@@ -57,9 +55,8 @@ Das FullpageOS Control System basiert auf einem Debian Self Build System mit:
 
 👉 Speziell entwickelt für Grafana-Dashboards und Monitoring-Systeme.
 
----
 
-# 🔥 Features
+<img src="docs/assets/section-headers/de/06-features.svg" alt="Section heading" width="837">
 
 - Einfache Installation: Ein einmaliger Script-Durchlauf richtet das komplette System ein  
 - Automatisierte Updates: System bleibt automatisch aktuell  
@@ -68,9 +65,8 @@ Das FullpageOS Control System basiert auf einem Debian Self Build System mit:
 - API Steuerung: URL-Wechsel per HTTP  
 - Modular aufgebaut: Erweiterbar über Module-System  
 
----
 
-# 📦 Anforderungen
+<img src="docs/assets/section-headers/de/07-requirements.svg" alt="Section heading" width="837">
 
 - Raspberry Pi 2, 3, 4 oder 5  
 - Raspberry Pi OS (Trixie Lite) als Basis-Image  
@@ -78,9 +74,8 @@ Das FullpageOS Control System basiert auf einem Debian Self Build System mit:
 - Netzwerkverbindung (LAN empfohlen)  
 - SSH Zugriff erforderlich  
 
----
 
-# 🧠 Konzept
+<img src="docs/assets/section-headers/de/08-concept.svg" alt="Section heading" width="837">
 
 Das System besteht aus zwei Ebenen:
 
@@ -92,9 +87,8 @@ Das System besteht aus zwei Ebenen:
 
 👉 Ohne ein bootfähiges Raspberry Pi OS funktioniert das System NICHT.
 
----
 
-# 🚀 Installation
+<img src="docs/assets/section-headers/de/09-installation.svg" alt="Section heading" width="837">
 
 ## 1. Raspberry Pi OS flashen
 
@@ -102,7 +96,6 @@ Das System besteht aus zwei Ebenen:
 - Pi OS: Trixie Lite
 - SD-Karte flashen (mindestens 8GB)
 
----
 
 ## 2. SSH aktivieren
 
@@ -116,7 +109,6 @@ user: pi
 password: raspberry
 ```
 
----
 
 ## 3. SSH Verbindung herstellen
 
@@ -125,14 +117,12 @@ ssh pi@IP
 sudo -i
 ```
 
----
 
 ## 4. (Optional) Basis vorbereiten
 
 ```bash
 apt update -y && apt upgrade -y
 ```
----
 
 ## 5. Repository klonen
 
@@ -143,7 +133,6 @@ git clone https://github.com/topa-LE/fullpageos-control.git
 cd fullpageos-control
 ```
 
----
 
 ## 5.1 Setup Erweiterung - Base Image
 
@@ -155,7 +144,6 @@ sudo reboot
 
 👉 Optional: Base-Image Backup erstellen
 
----
 
 ## 6. Build ausführen
 
@@ -166,16 +154,14 @@ cd /opt/fullpageos-control/hardware/pi4
 sudo ./build.sh
 ```
 
----
 
 ## 7. Neustart
 
 ```bash
 reboot
 ```
----
 
-# 💥 Ergebnis
+<img src="docs/assets/section-headers/de/10-result.svg" alt="Section heading" width="837">
 
 Nach dem Boot:
 
@@ -185,25 +171,22 @@ Nach dem Boot:
 - API läuft auf Port 3000
 - Module aktiv
 
----
 
-# 🌐 API Nutzung
+<img src="docs/assets/section-headers/de/11-api.svg" alt="Section heading" width="837">
 
 ## URL ändern
 
 ```bash
 curl "http://IP:3000/api/v1/url=https://example.com"
 ```
----
 
 ## Status prüfen
 
 ```bash
 curl http://IP:3000/api/v1/status
 ```
----
 
-# 🧩 Modul-System
+<img src="docs/assets/section-headers/de/12-modules.svg" alt="Section heading" width="837">
 
 Module können zentral aktiviert oder deaktiviert werden:
 
@@ -211,9 +194,8 @@ Module können zentral aktiviert oder deaktiviert werden:
 config/modules.conf
 ```
 
----
 
-# 📦 Architektur
+<img src="docs/assets/section-headers/de/13-architecture.svg" alt="Section heading" width="837">
 
 ```text
 📦 fullpageos-control/
@@ -239,9 +221,8 @@ config/modules.conf
     ├── restore_backups.sh
     └── flash.sh
 ```
----
 
-# 🚀 Download (Prebuilt Images)
+<img src="docs/assets/section-headers/de/14-download.svg" alt="Section heading" width="837">
 
 [![Release Date](https://img.shields.io/github/release-date/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases/tag/v1.0)
 [![Release](https://img.shields.io/github/v/release/topa-LE/fullpageos-control)](https://github.com/topa-LE/fullpageos-control/releases)
@@ -268,7 +249,6 @@ Fertige Images stehen im Release zur Verfügung (Pi's alle Modelle + Odroid-C2):
 
 👉 Einfach herunterladen, auf SD-Karte flashen und starten.
 
----
 
 ## ⚡ Quick Start
 
@@ -277,11 +257,9 @@ Fertige Images stehen im Release zur Verfügung (Pi's alle Modelle + Odroid-C2):
 3. SD-Karte einlegen  
 4. Booten → fertig  
 
----
 
 👉 Kein Setup nötig – Plug & Play
 
----
 
 ## 🛠 Tools
 
@@ -296,12 +274,11 @@ Fertige Images stehen im Release zur Verfügung (Pi's alle Modelle + Odroid-C2):
 - Debian USB Boot Creator (12/13)
 - Debian Auto Server Installer (Hands-off)
 
-# 🚀 FULLPAGEOS CONTROL
+<img src="docs/assets/section-headers/de/15-project.svg" alt="Section heading" width="837">
 
 👉 Stabil, reproduzierbar und modular aufgebaut.
 
 
----
 
 
 ## 📜 Lizenz
