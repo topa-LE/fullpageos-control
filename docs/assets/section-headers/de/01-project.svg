@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="837" height="72" viewBox="0 0 837 94" preserveAspectRatio="xMinYMid meet"
+     width="837" height="94" viewBox="0 0 837 94"
      role="img" aria-label="FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)">
   <defs>
     <linearGradient id="icon-bg" x1="0" y1="0" x2="1" y2="1">
@@ -26,9 +26,9 @@
 
   <text x="121" y="57" fill="#e8f2fa"
         font-family="Arial, Helvetica, sans-serif"
-        font-size="22.3" font-weight="700">FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)</text>
+        font-size="20.5" font-weight="700">FULLPAGEOS CONTROL – KIOSK SYSTEM (PI2–PI5)</text>
 
-  <rect x="791" y="47"
-        width="31" height="3"
+  <rect x="725" y="47"
+        width="97" height="3"
         rx="1.5" fill="url(#heading-line)"/>
 </svg>

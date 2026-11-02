@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="837" height="72" viewBox="0 0 837 94" preserveAspectRatio="xMinYMid meet"
+     width="837" height="94" viewBox="0 0 837 94"
      role="img" aria-label="API Usage">
   <defs>
     <linearGradient id="icon-bg" x1="0" y1="0" x2="1" y2="1">
@@ -28,7 +28,7 @@
         font-family="Arial, Helvetica, sans-serif"
         font-size="29.0" font-weight="700">API Usage</text>
 
-  <rect x="306" y="47"
-        width="516" height="3"
+  <rect x="303" y="47"
+        width="519" height="3"
         rx="1.5" fill="url(#heading-line)"/>
 </svg>
