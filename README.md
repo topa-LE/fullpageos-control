@@ -29,30 +29,30 @@ Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk
 <table width="100%">
   <thead>
     <tr>
-      <th width="261">Raspberry Pi</th>
-      <th width="576">Odroid-C2</th>
+      <th width="367">Raspberry Pi</th>
+      <th width="470">Odroid-C2</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td width="261"><strong>Hauptplattform</strong></td>
-      <td width="576"><strong>Alternative / Legacy Support</strong></td>
+      <td width="367"><strong>Hauptplattform</strong></td>
+      <td width="470"><strong>Alternative / Legacy Support</strong></td>
     </tr>
     <tr>
-      <td width="261"><strong>Pi 2 · Pi 3 · Pi 4 · Pi 5</strong></td>
-      <td width="576"><strong>DietPi · Debian Trixie 64 Bit</strong></td>
+      <td width="367"><strong>Pi 2 · Pi 3 · Pi 4 · Pi 5</strong></td>
+      <td width="470"><strong>DietPi · Debian Trixie 64 Bit</strong></td>
     </tr>
     <tr>
-      <td width="261">FullPageOS-kompatibel</td>
-      <td width="576">Einrichtung über eigene Skripte</td>
+      <td width="367">FullPageOS-kompatibel</td>
+      <td width="470">Einrichtung über eigene Skripte</td>
     </tr>
     <tr>
-      <td width="261">Optimiert für Kiosk-Systeme</td>
-      <td width="576">Setup: <code>platforms/odroid-c2</code></td>
+      <td width="367">Optimiert für Kiosk-Systeme</td>
+      <td width="470">Setup: <code>platforms/odroid-c2</code></td>
     </tr>
     <tr>
-      <td width="261">Ideal für Grafana-Dashboards</td>
-      <td width="576">Aktuell kein fertiges FullPageOS-Image verfügbar</td>
+      <td width="367">Ideal für Grafana-Dashboards</td>
+      <td width="470">Aktuell kein fertiges FullPageOS-Image verfügbar</td>
     </tr>
   </tbody>
 </table>
