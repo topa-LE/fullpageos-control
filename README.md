@@ -24,26 +24,23 @@ Willkommen im FullPageOS Control Setup-Repository!
 Dieses Repository enthält alles, was du benötigst, um ein vollständiges Kiosk-System auf Raspberry Pi (Pi2–Pi5) sowie auf dem Odroid-C2 zu installieren und zu betreiben.
 
 
-<img src="docs/assets/section-headers/de/02-platforms.svg" alt="Section heading" width="837">
-<img src="docs/assets/section-headers/de/03-raspberry.svg" alt="Section heading" width="837">
-- Pi2, Pi3, Pi4, Pi5
-- FullpageOS kompatibel
-- Optimiert für Kiosk-Systeme
-- Optimal für Grafana-Dashboards
+<img src="docs/assets/section-headers/de/02-platforms.svg" alt="Unterstützte Plattformen" width="837">
 
-<img src="docs/assets/section-headers/de/04-odroid.svg" alt="Section heading" width="837">
-- Basis: DietPi (Debian Trixie 64bit)
-- Kein FullpageOS Image aktuell verfügbar -> ready by topa-LE
-- Setup erfolgt über eigene Scripts (platforms/odroid-c2)
+| Raspberry Pi | Odroid-C2 |
+|:---|:---|
+| **Hauptplattform** | **Alternative / Legacy Support** |
+| **Pi 2 · Pi 3 · Pi 4 · Pi 5** | **DietPi · Debian Trixie 64 Bit** |
+| FullPageOS-kompatibel | Einrichtung über eigene Skripte |
+| Optimiert für Kiosk-Systeme | Setup: `platforms/odroid-c2` |
+| Ideal für Grafana-Dashboards | Aktuell kein fertiges FullPageOS-Image verfügbar |
 
 👉 🇩🇪 [Install Readme](./docs/README_odroid.md)
 
-👉 Hinweise:
+**Hinweise zum Odroid-C2:**
 
-Kein Raspberry Pi Bootsystem (config.txt, dtoverlay entfallen)
-Moderner Kernel über Armbian notwendig (kein Hardkernel Ubuntu 20.04!)
-Chromium wird direkt über apt installiert (kein Snap)
-
+- Kein Raspberry-Pi-Bootsystem (`config.txt`, `dtoverlay` entfallen)
+- Moderner Kernel über Armbian notwendig (kein Hardkernel Ubuntu 20.04)
+- Chromium wird direkt über `apt` installiert (kein Snap)
 
 <img src="docs/assets/section-headers/de/05-system.svg" alt="Section heading" width="837">
 
